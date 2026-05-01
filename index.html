@@ -19,192 +19,81 @@ html{scroll-behavior:smooth;}
 body{
   min-height:100vh;font-family:'Rajdhani',sans-serif;
   background:var(--dark);color:var(--white);overflow-x:hidden;
-  cursor:default;
 }
-
-/* ── SCREENS ─────────────────────── */
 .scr{display:none;min-height:100vh;flex-direction:column;
-  align-items:center;justify-content:center;
-  position:relative;overflow:hidden;padding:48px 20px;}
+align-items:center;justify-content:center;
+position:relative;overflow:hidden;padding:48px 20px;}
 .scr.on{display:flex;}
-
-/* ── BG GRID ─────────────────────── */
 .bg-grid{position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(232,24,31,0.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(232,24,31,0.04) 1px,transparent 1px);
-  background-size:48px 48px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
+background-image:
+linear-gradient(rgba(232,24,31,0.04) 1px,transparent 1px),
+linear-gradient(90deg,rgba(232,24,31,0.04) 1px,transparent 1px);
+background-size:48px 48px;
+mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
 .bg-noise{position:absolute;inset:0;pointer-events:none;opacity:0.03;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 .scr>*{position:relative;z-index:1;}
 
-/* ── LANDING ─────────────────────── */
-#s-land{
-  background:radial-gradient(ellipse 100% 80% at 50% 0%,#1a0204 0%,var(--dark) 65%);
-  gap:28px;text-align:center;
-}
+/* LANDING */
+#s-land{background:radial-gradient(ellipse 100% 80% at 50% 0%,#1a0204 0%,var(--dark) 65%);gap:28px;text-align:center;}
 .land-katana{width:200px;height:3px;background:linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent);margin:0 auto;position:relative;}
 .land-katana::before{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:6px;height:5px;background:var(--gold);border-radius:50%;}
-.land-logo{
-  font-family:'Bebas Neue',display;font-size:clamp(3.5rem,12vw,7rem);
-  letter-spacing:6px;line-height:0.9;
-  background:linear-gradient(135deg,var(--gold) 0%,var(--red2) 40%,var(--gold2) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 30px rgba(232,24,31,0.5));
-  animation:logoPulse 3s ease-in-out infinite;
-}
-@keyframes logoPulse{
-  0%,100%{filter:drop-shadow(0 0 30px rgba(232,24,31,0.5));}
-  50%{filter:drop-shadow(0 0 60px rgba(245,200,66,0.7));}
-}
+.land-logo{font-family:'Bebas Neue',display;font-size:clamp(3.5rem,12vw,7rem);letter-spacing:6px;line-height:0.9;background:linear-gradient(135deg,var(--gold) 0%,var(--red2) 40%,var(--gold2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(232,24,31,0.5));animation:logoPulse 3s ease-in-out infinite;}
+@keyframes logoPulse{0%,100%{filter:drop-shadow(0 0 30px rgba(232,24,31,0.5));}50%{filter:drop-shadow(0 0 60px rgba(245,200,66,0.7));}}
 .land-sub{font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:8px;color:var(--muted);text-transform:uppercase;}
 .land-desc{font-size:0.95rem;color:var(--muted);max-width:380px;line-height:1.9;font-weight:300;}
-/* animated crossed swords */
-.swords-wrap{position:relative;width:120px;height:80px;margin:0 auto;}
-.sword-svg{position:absolute;transition:transform 0.4s;}
-.sword-svg:first-child{left:0;top:0;transform:rotate(-35deg);}
-.sword-svg:last-child{right:0;top:0;transform:rotate(35deg);}
-.swords-wrap:hover .sword-svg:first-child{transform:rotate(-20deg);}
-.swords-wrap:hover .sword-svg:last-child{transform:rotate(20deg);}
-/* energy ring */
-.energy-ring{width:140px;height:140px;border-radius:50%;margin:0 auto;
-  border:1px solid rgba(232,24,31,0.2);
-  box-shadow:0 0 40px rgba(232,24,31,0.1),inset 0 0 40px rgba(232,24,31,0.05);
-  animation:ringPulse 2.5s ease-in-out infinite;
-  display:flex;align-items:center;justify-content:center;position:relative;}
-@keyframes ringPulse{
-  0%,100%{box-shadow:0 0 40px rgba(232,24,31,0.1),inset 0 0 40px rgba(232,24,31,0.05);}
-  50%{box-shadow:0 0 80px rgba(232,24,31,0.25),inset 0 0 60px rgba(245,200,66,0.1);}
-}
-.energy-ring::before{
-  content:'';position:absolute;inset:8px;border-radius:50%;
-  border:1px solid rgba(245,200,66,0.15);
-  animation:ringPulse 2.5s ease-in-out infinite reverse;
-}
+.energy-ring{width:140px;height:140px;border-radius:50%;margin:0 auto;border:1px solid rgba(232,24,31,0.2);box-shadow:0 0 40px rgba(232,24,31,0.1),inset 0 0 40px rgba(232,24,31,0.05);animation:ringPulse 2.5s ease-in-out infinite;display:flex;align-items:center;justify-content:center;position:relative;}
+@keyframes ringPulse{0%,100%{box-shadow:0 0 40px rgba(232,24,31,0.1),inset 0 0 40px rgba(232,24,31,0.05);}50%{box-shadow:0 0 80px rgba(232,24,31,0.25),inset 0 0 60px rgba(245,200,66,0.1);}}
+.energy-ring::before{content:'';position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(245,200,66,0.15);animation:ringPulse 2.5s ease-in-out infinite reverse;}
 
-/* ── BTN PRIMARY ─────────────────── */
-.btn-prime{
-  background:transparent;border:1px solid rgba(232,24,31,0.5);
-  color:var(--white);font-family:'Orbitron',monospace;font-size:0.65rem;
-  letter-spacing:5px;text-transform:uppercase;padding:16px 44px;
-  border-radius:2px;cursor:pointer;transition:all 0.35s;position:relative;overflow:hidden;
-}
-.btn-prime::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(232,24,31,0.15),rgba(245,200,66,0.08));
-  transform:translateX(-100%);transition:transform 0.35s;}
+/* BTN */
+.btn-prime{background:transparent;border:1px solid rgba(232,24,31,0.5);color:var(--white);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;padding:16px 44px;border-radius:2px;cursor:pointer;transition:all 0.35s;position:relative;overflow:hidden;}
+.btn-prime::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,24,31,0.15),rgba(245,200,66,0.08));transform:translateX(-100%);transition:transform 0.35s;}
 .btn-prime:hover::before{transform:translateX(0);}
-.btn-prime:hover{border-color:var(--red);letter-spacing:7px;
-  box-shadow:0 0 30px rgba(232,24,31,0.3);}
+.btn-prime:hover{border-color:var(--red);letter-spacing:7px;box-shadow:0 0 30px rgba(232,24,31,0.3);}
 .btn-prime:active{transform:scale(0.97);}
 
-/* ── SETUP ─────────────────────── */
-#s-setup{
-  background:radial-gradient(ellipse 70% 50% at 50% 20%,#150206,var(--dark) 70%);
-  gap:28px;
-}
-.setup-panel{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:3px;padding:36px 28px;max-width:440px;width:100%;
-  display:flex;flex-direction:column;gap:24px;
-  backdrop-filter:blur(20px);
-}
-.eyebrow{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:5px;
-  color:var(--red);text-transform:uppercase;opacity:0.7;}
-.stitle{font-family:'Bebas Neue',display;font-size:clamp(2rem,6vw,3.2rem);
-  letter-spacing:4px;line-height:1;}
+/* SETUP */
+#s-setup{background:radial-gradient(ellipse 70% 50% at 50% 20%,#150206,var(--dark) 70%);gap:28px;}
+.setup-panel{background:var(--panel);border:1px solid var(--border);border-radius:3px;padding:36px 28px;max-width:440px;width:100%;display:flex;flex-direction:column;gap:24px;backdrop-filter:blur(20px);}
+.eyebrow{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:5px;color:var(--red);text-transform:uppercase;opacity:0.7;}
+.stitle{font-family:'Bebas Neue',display;font-size:clamp(2rem,6vw,3.2rem);letter-spacing:4px;line-height:1;}
 .field-g{display:flex;flex-direction:column;gap:8px;}
-.f-label{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:4px;
-  color:var(--gold);opacity:0.6;text-transform:uppercase;}
-.f-input{
-  width:100%;background:rgba(255,255,255,0.03);border:none;
-  border-bottom:1px solid rgba(232,24,31,0.3);border-radius:0;
-  padding:13px 4px;color:var(--white);font-size:1rem;
-  font-family:'Rajdhani',sans-serif;font-weight:500;outline:none;
-  transition:border-bottom-color 0.3s;letter-spacing:1px;
-}
+.f-label{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:4px;color:var(--gold);opacity:0.6;text-transform:uppercase;}
+.f-input{width:100%;background:rgba(255,255,255,0.03);border:none;border-bottom:1px solid rgba(232,24,31,0.3);border-radius:0;padding:13px 4px;color:var(--white);font-size:1rem;font-family:'Rajdhani',sans-serif;font-weight:500;outline:none;transition:border-bottom-color 0.3s;letter-spacing:1px;}
 .f-input:focus{border-bottom-color:var(--gold);}
 .f-input::placeholder{color:rgba(240,238,234,0.2);font-style:italic;}
 .level-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-.btn-level{
-  padding:14px 6px;border-radius:2px;border:1px solid var(--border);
-  font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;
-  text-transform:uppercase;cursor:pointer;transition:all 0.3s;
-  background:transparent;color:var(--muted);
-}
-.btn-level:hover,.btn-level.sel{
-  background:rgba(232,24,31,0.1);border-color:var(--red);
-  color:var(--white);box-shadow:0 0 20px rgba(232,24,31,0.15);
-}
+.btn-level{padding:14px 6px;border-radius:2px;border:1px solid var(--border);font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;background:transparent;color:var(--muted);}
+.btn-level:hover,.btn-level.sel{background:rgba(232,24,31,0.1);border-color:var(--red);color:var(--white);box-shadow:0 0 20px rgba(232,24,31,0.15);}
 .btn-level.sel{color:var(--gold);}
 
-/* ── SERVER ─────────────────────── */
-#s-server{
-  background:radial-gradient(ellipse 70% 50% at 50% 20%,#150206,var(--dark) 70%);
-  gap:24px;text-align:center;
-}
-.link-panel{
-  background:rgba(255,255,255,0.03);border:1px solid var(--border);
-  border-radius:2px;padding:14px 18px;max-width:500px;width:100%;
-  display:flex;align-items:center;gap:14px;
-}
-.link-txt{flex:1;font-size:0.68rem;color:rgba(240,238,234,0.3);
-  word-break:break-all;text-align:left;font-family:'Orbitron',monospace;letter-spacing:0.3px;}
-.btn-cp{white-space:nowrap;padding:10px 16px;border-radius:2px;
-  border:1px solid rgba(232,24,31,0.4);color:var(--gold);
-  font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;
-  cursor:pointer;transition:all 0.3s;background:transparent;}
+/* SERVER */
+#s-server{background:radial-gradient(ellipse 70% 50% at 50% 20%,#150206,var(--dark) 70%);gap:24px;text-align:center;}
+.link-panel{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:2px;padding:14px 18px;max-width:500px;width:100%;display:flex;align-items:center;gap:14px;}
+.link-txt{flex:1;font-size:0.68rem;color:rgba(240,238,234,0.3);word-break:break-all;text-align:left;font-family:'Orbitron',monospace;letter-spacing:0.3px;}
+.btn-cp{white-space:nowrap;padding:10px 16px;border-radius:2px;border:1px solid rgba(232,24,31,0.4);color:var(--gold);font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;cursor:pointer;transition:all 0.3s;background:transparent;}
 .btn-cp:hover{background:rgba(232,24,31,0.1);border-color:var(--red);}
-
-/* lobby box */
-.lobby-box{
-  background:#000;border:1px solid rgba(255,255,255,0.06);
-  border-radius:3px;padding:24px;max-width:500px;width:100%;
-  position:relative;overflow:hidden;
-}
-.scanline{position:absolute;inset:0;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.01) 2px,rgba(255,255,255,0.01) 4px);}
-.lobby-lbl{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:4px;
-  color:rgba(255,255,255,0.2);text-transform:uppercase;margin-bottom:14px;text-align:left;}
+.lobby-box{background:#000;border:1px solid rgba(255,255,255,0.06);border-radius:3px;padding:24px;max-width:500px;width:100%;position:relative;overflow:hidden;}
+.scanline{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.01) 2px,rgba(255,255,255,0.01) 4px);}
+.lobby-lbl{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:4px;color:rgba(255,255,255,0.2);text-transform:uppercase;margin-bottom:14px;text-align:left;}
 .player-slots{display:flex;flex-direction:column;gap:10px;}
-.player-slot{
-  display:flex;align-items:center;gap:12px;padding:12px 14px;
-  background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);
-  border-radius:2px;min-height:46px;
-}
+.player-slot{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.05);border-radius:2px;min-height:46px;}
 .slot-num{font-family:'Bebas Neue',display;font-size:1.2rem;color:var(--red);width:20px;}
 .slot-name{font-family:'Rajdhani',sans-serif;font-size:0.9rem;letter-spacing:2px;color:var(--muted);}
 .slot-name.filled{color:var(--gold);font-weight:600;}
 .slot-status{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#1a1a1a;}
 .slot-status.on{background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 1.5s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.btn-start{padding:16px 48px;border-radius:2px;border:1px solid rgba(245,200,66,0.4);font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--gold);transition:all 0.4s;opacity:0.4;pointer-events:none;}
+.btn-start.ready{opacity:1;pointer-events:all;box-shadow:0 0 30px rgba(245,200,66,0.2);}
+.btn-start.ready:hover{background:rgba(245,200,66,0.1);border-color:var(--gold);letter-spacing:7px;box-shadow:0 0 50px rgba(245,200,66,0.35);}
 
-.btn-start{
-  padding:16px 48px;border-radius:2px;border:1px solid rgba(245,200,66,0.4);
-  font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:5px;
-  text-transform:uppercase;cursor:pointer;background:transparent;
-  color:var(--gold);transition:all 0.4s;opacity:0.4;pointer-events:none;
-}
-.btn-start.ready{
-  opacity:1;pointer-events:all;
-  box-shadow:0 0 30px rgba(245,200,66,0.2);
-}
-.btn-start.ready:hover{
-  background:rgba(245,200,66,0.1);border-color:var(--gold);
-  letter-spacing:7px;box-shadow:0 0 50px rgba(245,200,66,0.35);
-}
+/* JOIN */
+#s-join{background:radial-gradient(ellipse 70% 50% at 50% 20%,#150206,var(--dark) 70%);gap:28px;text-align:center;}
 
-/* ── JOIN ─────────────────────── */
-#s-join{
-  background:radial-gradient(ellipse 70% 50% at 50% 20%,#150206,var(--dark) 70%);
-  gap:28px;text-align:center;
-}
-
-/* ── BATTLE ─────────────────────── */
-#s-battle{
-  background:radial-gradient(ellipse 80% 60% at 50% 10%,#1a0204,var(--dark) 60%);
-  gap:20px;padding:24px 20px;
-}
+/* BATTLE */
+#s-battle{background:radial-gradient(ellipse 80% 60% at 50% 10%,#1a0204,var(--dark) 60%);gap:20px;padding:24px 20px;}
 .battle-header{width:100%;max-width:700px;display:flex;align-items:center;gap:12px;}
 .score-block{display:flex;flex-direction:column;gap:2px;flex:1;}
 .score-name{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--muted);}
@@ -213,103 +102,53 @@ body{
 .p2 .score-val{color:var(--cyan);}
 .score-block.p2{text-align:right;}
 .vs-sep{font-family:'Bebas Neue',display;font-size:1.4rem;color:rgba(255,255,255,0.2);letter-spacing:2px;}
-
-/* progress bars */
 .prog-wrap{width:100%;max-width:700px;display:flex;gap:8px;align-items:center;}
 .prog-bar-outer{flex:1;height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
 .prog-bar-inner{height:100%;border-radius:2px;transition:width 1s linear;}
 .p1 .prog-bar-inner{background:linear-gradient(90deg,var(--red),var(--gold));}
 .p2 .prog-bar-inner{background:linear-gradient(90deg,var(--cyan),#7b2fff);}
 .q-counter{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);}
-
-/* timer */
 .timer-ring-wrap{position:relative;width:64px;height:64px;flex-shrink:0;}
 .timer-ring-svg{width:64px;height:64px;transform:rotate(-90deg);}
 .timer-ring-bg{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:3;}
-.timer-ring-fg{fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round;
-  stroke-dasharray:163;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke 0.5s;}
-.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',display;font-size:1.3rem;color:var(--white);}
-
-/* question card */
-.q-card{
-  background:var(--dark3);border:1px solid var(--border);
-  border-radius:4px;padding:28px 24px;max-width:700px;width:100%;
-  display:flex;flex-direction:column;gap:20px;
-}
+.timer-ring-fg{fill:none;stroke:var(--red);stroke-width:3;stroke-linecap:round;stroke-dasharray:150.8;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke 0.5s;}
+.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',display;font-size:1.3rem;color:var(--white);}
+.q-card{background:var(--dark3);border:1px solid var(--border);border-radius:4px;padding:28px 24px;max-width:700px;width:100%;display:flex;flex-direction:column;gap:20px;}
 .q-badge{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:4px;color:var(--red);opacity:0.6;}
-.q-text{font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:600;
-  line-height:1.6;letter-spacing:0.5px;}
+.q-text{font-family:'Rajdhani',sans-serif;font-size:1.15rem;font-weight:600;line-height:1.6;letter-spacing:0.5px;}
 .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.opt-btn{
-  padding:15px 14px;border-radius:2px;border:1px solid var(--border);
-  background:rgba(255,255,255,0.02);color:var(--white);
-  font-family:'Rajdhani',sans-serif;font-size:0.92rem;font-weight:500;
-  letter-spacing:0.5px;cursor:pointer;transition:all 0.25s;text-align:left;
-}
-.opt-btn:hover:not(:disabled){
-  border-color:var(--gold);background:rgba(245,200,66,0.07);
-  box-shadow:0 0 20px rgba(245,200,66,0.1);
-}
+.opt-btn{padding:15px 14px;border-radius:2px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--white);font-family:'Rajdhani',sans-serif;font-size:0.92rem;font-weight:500;letter-spacing:0.5px;cursor:pointer;transition:all 0.25s;text-align:left;}
+.opt-btn:hover:not(:disabled){border-color:var(--gold);background:rgba(245,200,66,0.07);box-shadow:0 0 20px rgba(245,200,66,0.1);}
 .opt-btn:disabled{cursor:default;}
 .opt-btn.correct{background:rgba(57,255,110,0.15)!important;border-color:var(--green)!important;color:var(--green)!important;}
 .opt-btn.wrong{background:rgba(232,24,31,0.15)!important;border-color:var(--red)!important;color:var(--red)!important;}
 .opt-btn.reveal-correct{background:rgba(57,255,110,0.1)!important;border-color:rgba(57,255,110,0.4)!important;}
-
-/* waiting overlay */
-.wait-overlay{
-  position:absolute;inset:0;background:rgba(8,9,13,0.9);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
-  z-index:10;border-radius:4px;
-}
-.wait-spinner{width:40px;height:40px;border-radius:50%;
-  border:2px solid rgba(232,24,31,0.2);border-top-color:var(--red);
-  animation:spin 1s linear infinite;}
+.wait-overlay{position:absolute;inset:0;background:rgba(8,9,13,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:10;border-radius:4px;}
+.wait-spinner{width:40px;height:40px;border-radius:50%;border:2px solid rgba(232,24,31,0.2);border-top-color:var(--red);animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .wait-txt{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:4px;color:var(--muted);animation:blink 1.5s infinite;}
 
-/* ── RESULT ─────────────────────── */
-#s-result{
-  background:radial-gradient(ellipse 80% 60% at 50% 15%,#1a0204,var(--dark) 65%);
-  gap:28px;text-align:center;
-}
-.result-card{
-  max-width:500px;width:100%;border:1px solid var(--border);
-  border-radius:4px;padding:36px 28px;display:flex;flex-direction:column;gap:20px;
-  background:var(--panel);
-}
-.winner-badge{
-  font-family:'Bebas Neue',display;font-size:3rem;letter-spacing:6px;
-  background:linear-gradient(135deg,var(--gold),var(--red2),var(--gold2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  animation:logoPulse 2s ease-in-out infinite;
-}
-.score-row{display:flex;justify-content:space-between;align-items:center;
-  padding:14px 0;border-bottom:1px solid var(--border);}
+/* RESULT */
+#s-result{background:radial-gradient(ellipse 80% 60% at 50% 15%,#1a0204,var(--dark) 65%);gap:28px;text-align:center;}
+.result-card{max-width:500px;width:100%;border:1px solid var(--border);border-radius:4px;padding:36px 28px;display:flex;flex-direction:column;gap:20px;background:var(--panel);}
+.winner-badge{font-family:'Bebas Neue',display;font-size:3rem;letter-spacing:6px;background:linear-gradient(135deg,var(--gold),var(--red2),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:logoPulse 2s ease-in-out infinite;}
+.score-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);}
 .score-row:last-child{border:none;}
 .sr-name{font-family:'Rajdhani',sans-serif;font-size:1rem;letter-spacing:2px;font-weight:600;}
 .sr-pts{font-family:'Bebas Neue',display;font-size:2rem;letter-spacing:3px;}
-
-/* ── BACK BTN ─────────────────────── */
-.btn-back{
-  position:absolute;top:20px;left:20px;background:transparent;
-  border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);
-  padding:8px 16px;border-radius:2px;cursor:pointer;
-  font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;
-  text-transform:uppercase;transition:all 0.3s;z-index:10;
-}
+.btn-back{position:absolute;top:20px;left:20px;background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);padding:8px 16px;border-radius:2px;cursor:pointer;font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;z-index:10;}
 .btn-back:hover{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);}
-
-/* ── CONFETTI CANVAS ─────────────── */
 #cc{position:fixed;inset:0;pointer-events:none;z-index:9999;}
+.firebase-status{position:fixed;bottom:12px;right:12px;font-family:'Orbitron',monospace;font-size:0.4rem;letter-spacing:2px;color:rgba(255,255,255,0.15);z-index:9998;}
+.firebase-status.connected{color:rgba(57,255,110,0.4);}
+.firebase-status.error{color:rgba(232,24,31,0.5);}
 </style>
 </head>
 <body>
 <canvas id="cc"></canvas>
+<div class="firebase-status" id="fb-status">FIREBASE CONNECTING...</div>
 
-<!-- ════════════════════════════════
-     SCREEN 1 — LANDING
-════════════════════════════════ -->
+<!-- SCREEN 1 — LANDING -->
 <div class="scr on" id="s-land">
   <div class="bg-grid"></div><div class="bg-noise"></div>
   <div class="energy-ring">
@@ -320,7 +159,6 @@ body{
           <stop offset="100%" stop-color="#e8181f" stop-opacity="0.5"/>
         </radialGradient>
       </defs>
-      <!-- Stylized Q mark -->
       <circle cx="32" cy="30" r="16" fill="none" stroke="url(#sg)" stroke-width="3"/>
       <path d="M38 42 L48 52" stroke="url(#sg)" stroke-width="3.5" stroke-linecap="round"/>
       <line x1="32" y1="24" x2="32" y2="32" stroke="#f5c842" stroke-width="2.5" stroke-linecap="round"/>
@@ -337,7 +175,6 @@ body{
   <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
     <button class="btn-prime" onclick="goTo('s-setup')">Host a Server</button>
   </div>
-  <!-- animated katana line -->
   <div style="display:flex;align-items:center;gap:16px;max-width:320px;width:100%;">
     <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(232,24,31,0.3));"></div>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -352,9 +189,7 @@ body{
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     SCREEN 2 — SETUP
-════════════════════════════════ -->
+<!-- SCREEN 2 — SETUP -->
 <div class="scr" id="s-setup">
   <div class="bg-grid"></div><div class="bg-noise"></div>
   <button class="btn-back" onclick="goTo('s-land')">← Back</button>
@@ -379,12 +214,10 @@ body{
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     SCREEN 3 — SERVER LOBBY (HOST)
-════════════════════════════════ -->
+<!-- SCREEN 3 — SERVER LOBBY -->
 <div class="scr" id="s-server">
   <div class="bg-grid"></div><div class="bg-noise"></div>
-  <button class="btn-back" onclick="goTo('s-setup')">← Back</button>
+  <button class="btn-back" onclick="leaveSession();goTo('s-setup')">← Back</button>
   <div style="text-align:center;display:flex;flex-direction:column;gap:6px;">
     <div class="eyebrow">Mission Active</div>
     <h2 class="stitle">Waiting for Opponent</h2>
@@ -413,9 +246,7 @@ body{
   <div style="font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;color:rgba(255,255,255,0.1);">Battle starts when both players are ready</div>
 </div>
 
-<!-- ════════════════════════════════
-     SCREEN 4 — JOIN
-════════════════════════════════ -->
+<!-- SCREEN 4 — JOIN -->
 <div class="scr" id="s-join">
   <div class="bg-grid"></div><div class="bg-noise"></div>
   <div class="energy-ring" style="width:100px;height:100px;">
@@ -440,12 +271,9 @@ body{
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     SCREEN 5 — BATTLE
-════════════════════════════════ -->
+<!-- SCREEN 5 — BATTLE -->
 <div class="scr" id="s-battle">
   <div class="bg-grid"></div><div class="bg-noise"></div>
-  <!-- Header scores -->
   <div class="battle-header">
     <div class="score-block p1">
       <div class="score-name" id="b-p1-name">P1</div>
@@ -457,17 +285,15 @@ body{
       <div class="score-val" id="b-p2-score">0</div>
     </div>
   </div>
-  <!-- Progress -->
   <div class="prog-wrap">
     <div class="prog-bar-outer p1"><div class="prog-bar-inner" id="prog-p1" style="width:0%"></div></div>
     <span class="q-counter" id="q-num">1/25</span>
     <div class="prog-bar-outer p2"><div class="prog-bar-inner" id="prog-p2" style="width:0%"></div></div>
   </div>
-  <!-- Question card -->
   <div class="q-card" style="position:relative;">
     <div class="wait-overlay" id="wait-overlay">
       <div class="wait-spinner"></div>
-      <div class="wait-txt" id="wait-msg">Waiting for host to start...</div>
+      <div class="wait-txt" id="wait-msg">Connecting to Firebase...</div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;">
       <div class="q-badge" id="q-badge">Famous Anime</div>
@@ -482,13 +308,10 @@ body{
     <div class="q-text" id="q-text">Question loading...</div>
     <div class="opts-grid" id="opts-grid"></div>
   </div>
-  <!-- Status bar -->
   <div style="font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--muted);" id="battle-status">—</div>
 </div>
 
-<!-- ════════════════════════════════
-     SCREEN 6 — RESULT
-════════════════════════════════ -->
+<!-- SCREEN 6 — RESULT -->
 <div class="scr" id="s-result">
   <div class="bg-grid"></div><div class="bg-noise"></div>
   <div class="eyebrow">Battle Complete</div>
@@ -506,436 +329,728 @@ body{
     </div>
     <div style="font-size:0.8rem;color:var(--muted);letter-spacing:1px;font-weight:300;" id="res-detail">—</div>
   </div>
-  <button class="btn-prime" onclick="goTo('s-land');resetAll();">Play Again</button>
+  <button class="btn-prime" onclick="resetAll();goTo('s-land');">Play Again</button>
 </div>
 
-<script>
-// ════════════════════════════════════════════════════════
-// QUESTION BANK — 25 per level (easy / normal / hard)
-// 20 famous + 5 inner/obscure per set
-// ════════════════════════════════════════════════════════
-const QB = {
-easy:[
-  // Famous (20)
-  {t:"Famous",q:"What is the name of the main character in Naruto?",o:["Naruto Uzumaki","Sasuke Uchiha","Sakura Haruno","Kakashi Hatake"],a:0},
-  {t:"Famous",q:"In Dragon Ball Z, what transformation does Goku first achieve during the Frieza saga?",o:["Super Saiyan","Super Saiyan 2","Super Saiyan God","Ultra Instinct"],a:0},
-  {t:"Famous",q:"Which anime features a Death Note that kills anyone whose name is written in it?",o:["Fullmetal Alchemist","Death Note","Code Geass","Tokyo Ghoul"],a:1},
-  {t:"Famous",q:"What is the name of the pirate crew in One Piece led by Monkey D. Luffy?",o:["Heart Pirates","Whitebeard Pirates","Straw Hat Pirates","Red Hair Pirates"],a:2},
-  {t:"Famous",q:"In Attack on Titan, what is the name of the special operations squad that protects Eren?",o:["Survey Corps","Garrison","Military Police","Scout Division"],a:0},
-  {t:"Famous",q:"Which anime is set in the Hidden Leaf Village?",o:["Bleach","One Piece","Naruto","Dragon Ball"],a:2},
-  {t:"Famous",q:"What fruit gives Luffy his rubber powers in One Piece?",o:["Flare-Flare Fruit","Gum-Gum Fruit","Dark-Dark Fruit","String-String Fruit"],a:1},
-  {t:"Famous",q:"What is the name of Goku's son in Dragon Ball Z?",o:["Vegeta","Piccolo","Gohan","Trunks"],a:2},
-  {t:"Famous",q:"Which anime follows students at UA High School learning to become heroes?",o:["Demon Slayer","My Hero Academia","Bleach","Black Clover"],a:1},
-  {t:"Famous",q:"In Demon Slayer, what is the name of Tanjiro's demon sister?",o:["Nezuko","Kanao","Shinobu","Mitsuri"],a:0},
-  {t:"Famous",q:"What sport is featured in the anime Haikyuu!!?",o:["Basketball","Soccer","Baseball","Volleyball"],a:3},
-  {t:"Famous",q:"In Fullmetal Alchemist, what did Edward Elric lose when performing human transmutation?",o:["His memory","His left arm and right leg","Both legs","His eyesight"],a:1},
-  {t:"Famous",q:"What is Naruto's signature jutsu?",o:["Chidori","Rasengan","Shadow Clone Jutsu","Reaper Death Seal"],a:2},
-  {t:"Famous",q:"Which anime features a group called the Espada?",o:["Naruto","One Piece","Bleach","Fairy Tail"],a:2},
-  {t:"Famous",q:"In My Hero Academia, what is Deku's real name?",o:["Katsuki Bakugo","Shoto Todoroki","Izuku Midoriya","Tenya Iida"],a:2},
-  {t:"Famous",q:"What anime features Titans who eat humans and a walled civilization?",o:["Tokyo Ghoul","Attack on Titan","Demon Slayer","Vinland Saga"],a:1},
-  {t:"Famous",q:"In Dragon Ball Z, what planet does Frieza destroy?",o:["Earth","Namek","Vegeta","Kanassa"],a:2},
-  {t:"Famous",q:"What is the name of Ichigo Kurosaki's Zanpakuto in Bleach?",o:["Zangetsu","Senbonzakura","Ryujin Jakka","Hyorinmaru"],a:0},
-  {t:"Famous",q:"In Sword Art Online, what is the name of the virtual world in Season 1?",o:["ALO","GGO","Aincrad","Underworld"],a:2},
-  {t:"Famous",q:"What power does Lelouch possess in Code Geass?",o:["Telekinesis","Geass — absolute obedience","Telepathy","Time manipulation"],a:1},
-  // Inner (5)
-  {t:"Inner",q:"What is the name of the first villain Izuku Midoriya defeats solo in My Hero Academia Season 1?",o:["Muscular","The Slime Villain","Stain","Shigaraki"],a:1},
-  {t:"Inner",q:"In Naruto, what is the name of the Hidden Sand Village's Kazekage at the start of the series?",o:["Rasa","Gaara","Temari","Baki"],a:0},
-  {t:"Inner",q:"What is Goku's power level when first detected by Raditz's scouter in DBZ?",o:["920","416","1,000","850"],a:1},
-  {t:"Inner",q:"In One Piece, what is the name of the Sea Restaurant that Sanji worked at?",o:["Baratie","Shells Town","Arlong Park","Loguetown"],a:0},
-  {t:"Inner",q:"What chapter does Attack on Titan manga end on?",o:["Chapter 130","Chapter 139","Chapter 145","Chapter 122"],a:1},
-],
-normal:[
-  {t:"Famous",q:"Which anime features a character who creates a world without crime using a magical notebook?",o:["Code Geass","Death Note","The Promised Neverland","Overlord"],a:1},
-  {t:"Famous",q:"In Hunter x Hunter, what type of Nen does Killua use?",o:["Emission","Transmutation","Enhancement","Manipulation"],a:1},
-  {t:"Famous",q:"What organization does Itachi Uchiha join after leaving the Hidden Leaf Village?",o:["Kara","Sound Village","Akatsuki","Root"],a:2},
-  {t:"Famous",q:"In One Piece, what sea does the Grand Line divide?",o:["East and West Blue","North and South Blue","All four Blues","Red and Blue Line"],a:1},
-  {t:"Famous",q:"What is the name of the Flame Hashira in Demon Slayer?",o:["Tengen Uzui","Rengoku Kyojuro","Gyomei Himejima","Sanemi Shinazugawa"],a:1},
-  {t:"Famous",q:"In Attack on Titan, which Titan shifter inherits the Founding Titan after Frieda Reiss?",o:["Eren Yeager","Armin Arlert","Zeke Yeager","Rod Reiss"],a:0},
-  {t:"Famous",q:"What is All Might's real name in My Hero Academia?",o:["Toshinori Yagi","Hizashi Yamada","Shota Aizawa","Nezu"],a:0},
-  {t:"Famous",q:"In Fullmetal Alchemist Brotherhood, who is the main antagonist?",o:["Scar","Pride","Father","Envy"],a:2},
-  {t:"Famous",q:"What type of Devil Fruit did Ace eat in One Piece?",o:["Mera Mera no Mi (Flame)","Hie Hie no Mi (Ice)","Gomu Gomu no Mi","Yami Yami no Mi"],a:0},
-  {t:"Famous",q:"In HxH, what phase of the Hunter Exam involves a tower of beasts?",o:["Second Phase","Third Phase","Fourth Phase","First Phase"],a:1},
-  {t:"Famous",q:"What is the name of Sasuke's first Curse Mark teacher?",o:["Itachi","Orochimaru","Kabuto","Madara"],a:1},
-  {t:"Famous",q:"In Bleach, what is the name of Rukia Kuchiki's Zanpakuto?",o:["Sode no Shirayuki","Zabimaru","Wabisuke","Ashisogi Jizo"],a:0},
-  {t:"Famous",q:"Which anime studio is behind One Punch Man Season 1?",o:["Madhouse","Pierrot","Sunrise","J.C.Staff"],a:0},
-  {t:"Famous",q:"In Jujutsu Kaisen, what is Gojo Satoru's special technique?",o:["Malevolent Shrine","Infinity — Six Eyes","Domain Expansion: Prison Realm","Divergent Fist"],a:1},
-  {t:"Famous",q:"What is the real identity of the masked figure Tobi in Naruto Shippuden?",o:["Obito Uchiha","Madara Uchiha","Izuna Uchiha","Black Zetsu"],a:0},
-  {t:"Famous",q:"In Dragon Ball Super, who is the God of Destruction of Universe 7?",o:["Whis","Champa","Beerus","Grand Priest"],a:2},
-  {t:"Famous",q:"What is the name of the island where the Straw Hats first land after the Grand Line entrance?",o:["Little Garden","Whisky Peak","Reverse Mountain","Drum Island"],a:1},
-  {t:"Famous",q:"In Evangelion, what does NERV's motto roughly translate to?",o:["God's in his Heaven","Man shall not live by bread alone","In the beginning God created","We are the chosen ones"],a:0},
-  {t:"Famous",q:"Which anime is set in Taisho-era Japan featuring demon slayers?",o:["Inuyasha","Demon Slayer","Rurouni Kenshin","Blade of the Immortal"],a:1},
-  {t:"Famous",q:"In JJK, what grade is Ryomen Sukuna?",o:["Grade 1","Special Grade","Semi-Special Grade","Grade 2"],a:1},
-  {t:"Inner",q:"In Hunter x Hunter, what is the name of the ants arc's main villain before he becomes the Ant King?",o:["Neferpitou","Meruem","Shaiapouf","Menthuthuyoupi"],a:1},
-  {t:"Inner",q:"What episode does Itachi reveal his true motives in Naruto Shippuden?",o:["Episode 339","Episode 280","Episode 357","Episode 300"],a:0},
-  {t:"Inner",q:"In FMA:B, what is the Philosopher's Stone made from?",o:["Refined alchemy","Human souls","Dragon stones","Red water"],a:1},
-  {t:"Inner",q:"In One Piece, what is the number of the Baroque Works agents that became Straw Hat allies?",o:["Mr. 2","Mr. 9 and Miss Wednesday","Mr. 0","Mr. 5"],a:1},
-  {t:"Inner",q:"What is the name of the organization that opposes the Jujutsu establishment in JJK?",o:["Time Vessel Association","Q","Disaster Curses group","The Perfect Human Order"],a:3},
-],
-hard:[
-  {t:"Famous",q:"In Neon Genesis Evangelion, what is the name of the 17th Angel?",o:["Kaworu Nagisa / Tabris","Ramiel","Sachiel","Leliel"],a:0},
-  {t:"Famous",q:"In HxH, Gon's Nen type is classified as what?",o:["Transmutation","Enhancement","Emission","Manipulation"],a:1},
-  {t:"Famous",q:"What is the name of the final form of Aizen's Zanpakuto in Bleach?",o:["Kyoka Suigetsu — Bleach","Cocoon of the King","Butterfly Form","Final Release"],a:1},
-  {t:"Famous",q:"In Code Geass, who is Lelouch's mother?",o:["Kaguya Sumeragi","Marianne vi Britannia","Euphemia li Britannia","Cornelia li Britannia"],a:1},
-  {t:"Famous",q:"What is the name of the magic system in Black Clover?",o:["Nen","Chakra","Ki","Mana-based magic"],a:3},
-  {t:"Famous",q:"In Steins;Gate, what does the Organization's SERN stand for?",o:["Science and Engineering Research Network","Société Européenne de Recherche Nucléaire","Synthetic Emergency Research Node","Systematic European Research Network"],a:1},
-  {t:"Famous",q:"In Re:Zero, what is the name of Emilia's contracted spirit?",o:["Beatrice","Echidna","Puck","Roswaal"],a:2},
-  {t:"Famous",q:"What is the real name of the Promised Neverland's demons' world called?",o:["Mujika's Domain","The Demon World","Goldy Pond","The Other Side"],a:1},
-  {t:"Famous",q:"In Vinland Saga, who is Thorfinn's father?",o:["Askeladd","Bjorn","Thors","Floki"],a:2},
-  {t:"Famous",q:"In Mushishi, what are Mushi?",o:["Spirits of the dead","Ancient life forms closer to life itself","Parasitic demons","Elemental entities"],a:1},
-  {t:"Famous",q:"What does Madara Uchiha's Infinite Tsukuyomi require to be cast globally?",o:["Rinnegan and Ten Tails","Bijuu chakra and Moon reflection","Full moon and Rinne-Sharingan casted on moon","Both Senjutsu and Genjutsu combined"],a:2},
-  {t:"Famous",q:"In FMA, what is the human cost of creating a Philosopher's Stone?",o:["Equivalent exchange of alchemist's lifespan","Massive sacrifice of human lives","One perfect soul","All alkahestry in a region"],a:1},
-  {t:"Famous",q:"Who is the author of the Attack on Titan manga?",o:["Masashi Kishimoto","Hajime Isayama","Tite Kubo","Kohei Horikoshi"],a:1},
-  {t:"Famous",q:"In Fate/Zero, what is Kiritsugu Emiya's signature combat style called?",o:["Magecraft assassination","Mage Killer — Contender style","Reinforcement magic","Reality Marble combat"],a:1},
-  {t:"Famous",q:"In Jujutsu Kaisen, Sukuna's domain expansion is called?",o:["Chimera Shadow Garden","Unlimited Void","Malevolent Shrine","Coffin of the Iron Mountain"],a:2},
-  {t:"Famous",q:"In Evangelion, the Human Instrumentality Project aims to achieve what?",o:["Defeat of all Angels","Merger of all human souls into one","Resurrection of Yui Ikari","Evolution beyond AT Field"],a:1},
-  {t:"Famous",q:"What year was the original Fullmetal Alchemist anime (not Brotherhood) released?",o:["2001","2003","2005","2007"],a:1},
-  {t:"Famous",q:"In One Piece, what is the name of the technique Rayleigh uses to knock out half a stadium?",o:["Haki burst","Conqueror's Haki","Ryou","Armament Haki"],a:1},
-  {t:"Famous",q:"Mob Psycho 100 is created by the same author as which other anime?",o:["Assassination Classroom","One Punch Man","Saiki K","Dr. Stone"],a:1},
-  {t:"Famous",q:"In Made in Abyss, what is a White Whistle made from?",o:["Rare relics from the Abyss","The corpse of a beloved person","Ancient alloy from the 7th layer","Soul fragments"],a:1},
-  {t:"Inner",q:"In Hunter x Hunter, what are the three conditions Kurapika puts on his Nen chains?",o:["Speed, Power, Duration","Limitation restricts to Spiders only, chain use costs life, healing forbidden","Must use Emperor Time, must not use with others","Uses all 10 fingers simultaneously"],a:1},
-  {t:"Inner",q:"In Steins;Gate, what is the divergence number of the 'true' Steins Gate world line?",o:["1.048596","1.130426","1.337280","0.571024"],a:0},
-  {t:"Inner",q:"What is the name of the final chapter (episode equivalent) of Berserk before Kentaro Miura's passing?",o:["Chapter 363","Chapter 364","Chapter 364","Chapter 360"],a:1},
-  {t:"Inner",q:"In Evangelion, what does 'AT Field' stand for?",o:["Absolute Terror Field","Advanced Technology Field","Anti-Titan Field","Anthropic Transfer Field"],a:0},
-  {t:"Inner",q:"In Vinland Saga Season 2, on what farm is Thorfinn a slave?",o:["Ketil's Farm","Leif's Farm","Canute's Manor","Snake's Farm"],a:0},
-]};
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, update, off, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-// ════════════════════════════════════════════════════════
-// STATE
-// ════════════════════════════════════════════════════════
-const G={
-  sid:'',role:'',level:'normal',
-  hostName:'',guestName:'',
-  p1score:0,p2score:0,
-  qIndex:0,questions:[],
-  timerInterval:null,timeLeft:20,
-  answered:false,started:false,
+const firebaseConfig = {
+  apiKey: "AIzaSyDuZ-Nlbxr7Uu-Oych3_t0_gjZFJWvNOMc",
+  authDomain: "quizz-taka.firebaseapp.com",
+  databaseURL: "https://quizz-taka-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "quizz-taka",
+  storageBucket: "quizz-taka.firebasestorage.app",
+  messagingSenderId: "79162719267",
+  appId: "1:79162719267:web:dd0839de6683d7c7058596",
+  measurementId: "G-WWE8WXTVSK"
 };
 
-// ════════════════════════════════════════════════════════
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const fbStatus = document.getElementById('fb-status');
+fbStatus.textContent = '● FIREBASE CONNECTED';
+fbStatus.classList.add('connected');
+
+// ══════════════════════════════════════════════
+// QUESTION BANK — 1000+ questions across levels
+// ══════════════════════════════════════════════
+const QB = {
+easy:[
+// ── Naruto ──
+{t:"Naruto",q:"What is the name of the main character in Naruto?",o:["Naruto Uzumaki","Sasuke Uchiha","Sakura Haruno","Kakashi Hatake"],a:0},
+{t:"Naruto",q:"What is Naruto's signature jutsu?",o:["Chidori","Rasengan","Shadow Clone Jutsu","Reaper Death Seal"],a:2},
+{t:"Naruto",q:"Which village is Naruto from?",o:["Hidden Sand","Hidden Cloud","Hidden Leaf","Hidden Mist"],a:2},
+{t:"Naruto",q:"What tailed beast is sealed inside Naruto?",o:["Five-Tails","Seven-Tails","Eight-Tails","Nine-Tails"],a:3},
+{t:"Naruto",q:"What is Kakashi's nickname?",o:["Copy Ninja","White Fang","Leaf's Flash","Silent Killer"],a:0},
+{t:"Naruto",q:"Who teaches Team 7?",o:["Guy Sensei","Asuma","Kakashi Hatake","Kurenai"],a:2},
+{t:"Naruto",q:"Sasuke belongs to which clan?",o:["Senju","Hyuga","Nara","Uchiha"],a:3},
+{t:"Naruto",q:"What color is Naruto's jumpsuit?",o:["Blue","Green","Orange","Red"],a:2},
+{t:"Naruto",q:"Who is Naruto's rival?",o:["Rock Lee","Neji","Sasuke","Gaara"],a:2},
+{t:"Naruto",q:"What is Sakura's main skill?",o:["Speed","Genjutsu","Medical Ninjutsu","Wind Release"],a:2},
+// ── Dragon Ball ──
+{t:"Dragon Ball",q:"In Dragon Ball Z, what transformation does Goku first achieve against Frieza?",o:["Super Saiyan","Super Saiyan 2","Super Saiyan God","Ultra Instinct"],a:0},
+{t:"Dragon Ball",q:"What is the name of Goku's son?",o:["Vegeta","Piccolo","Gohan","Trunks"],a:2},
+{t:"Dragon Ball",q:"What planet does Frieza destroy in DBZ?",o:["Earth","Namek","Planet Vegeta","Kanassa"],a:2},
+{t:"Dragon Ball",q:"Who is Goku's main rival in DBZ?",o:["Frieza","Cell","Majin Buu","Vegeta"],a:3},
+{t:"Dragon Ball",q:"What are the 7 magical orbs called?",o:["Dragon Stones","Eternal Orbs","Dragon Balls","Power Gems"],a:2},
+{t:"Dragon Ball",q:"What does Goku's Scouter read when he first sees Raditz?",o:["480","920","1000","210"],a:1},
+{t:"Dragon Ball",q:"What is the name of Vegeta's home planet?",o:["Frieza Planet","Namek","Planet Vegeta","Saiyan Prime"],a:2},
+{t:"Dragon Ball",q:"Which technique does Piccolo use to regenerate limbs?",o:["Saiyan Cells","Namekian Healing","Special Beam Cannon Recoil","Ki Regeneration"],a:1},
+{t:"Dragon Ball",q:"What color is a Super Saiyan's hair?",o:["White","Blue","Silver","Golden/Yellow"],a:3},
+{t:"Dragon Ball",q:"What is Gohan's student name at school?",o:["Mark","Gohan Jr","Eric","Barry"],a:0},
+// ── One Piece ──
+{t:"One Piece",q:"What fruit gives Luffy his rubber powers?",o:["Flare-Flare Fruit","Gum-Gum Fruit","Dark-Dark Fruit","String-String Fruit"],a:1},
+{t:"One Piece",q:"What is the name of Luffy's pirate crew?",o:["Heart Pirates","Whitebeard Pirates","Straw Hat Pirates","Red Hair Pirates"],a:2},
+{t:"One Piece",q:"Who is the swordsman of the Straw Hat Pirates?",o:["Sanji","Usopp","Zoro","Franky"],a:2},
+{t:"One Piece",q:"What does Luffy want to become?",o:["Pirate Admiral","King of the Pirates","Greatest Swordsman","Warlord"],a:1},
+{t:"One Piece",q:"What is Nami's role in the crew?",o:["Cook","Doctor","Navigator","Musician"],a:2},
+{t:"One Piece",q:"Where do the Straw Hats first enter the Grand Line?",o:["Loguetown","Reverse Mountain","Twin Capes","Marineford"],a:1},
+{t:"One Piece",q:"Who is the cook of the Straw Hat Pirates?",o:["Zoro","Sanji","Franky","Brook"],a:1},
+{t:"One Piece",q:"What is the treasure everyone seeks in One Piece?",o:["The Devil Fruit","The One Piece","The Void Century","The Ancient Weapons"],a:1},
+{t:"One Piece",q:"Who trained Luffy for 2 years on Ruskaina island?",o:["Shanks","Rayleigh","Garp","Whitebeard"],a:1},
+{t:"One Piece",q:"Chopper ate which Devil Fruit?",o:["Gomu Gomu no Mi","Mera Mera no Mi","Hito Hito no Mi","Yomi Yomi no Mi"],a:2},
+// ── Attack on Titan ──
+{t:"Attack on Titan",q:"What anime features Titans who eat humans and a walled civilization?",o:["Tokyo Ghoul","Attack on Titan","Demon Slayer","Vinland Saga"],a:1},
+{t:"Attack on Titan",q:"What is Eren Yeager's father's name?",o:["Zeke","Grisha","Rod","Reiner"],a:1},
+{t:"Attack on Titan",q:"What regiment does Eren join?",o:["Military Police","Garrison","Survey Corps","Training Corps"],a:2},
+{t:"Attack on Titan",q:"Who is Eren's childhood best friend (male)?",o:["Jean","Connie","Armin","Reiner"],a:2},
+{t:"Attack on Titan",q:"What is the name of the giant Colossal Titan that breached Wall Maria?",o:["Armored Titan","Colossal Titan","Female Titan","Beast Titan"],a:1},
+{t:"Attack on Titan",q:"Who is Mikasa related to (ancient warrior clan)?",o:["Eldians","Ackermann clan","Marleyans","Fritz bloodline"],a:1},
+{t:"Attack on Titan",q:"What three walls protect humanity?",o:["Rose, Sina, Maria","Alpha, Beta, Gamma","I, II, III","Inner, Middle, Outer"],a:0},
+{t:"Attack on Titan",q:"What device do soldiers use to move through the air?",o:["Omni-Gear","Wings of Freedom","Thunder Spears","ODM Gear"],a:3},
+{t:"Attack on Titan",q:"Who was the previous holder of the Attack Titan before Eren?",o:["Zeke Yeager","Grisha Yeager","Keith Shadis","Daz"],a:1},
+{t:"Attack on Titan",q:"What is the name of Levi's squad initially?",o:["Special Operations Squad","Titan Exterminators","Survey Elite","Wall Rose Unit"],a:0},
+// ── My Hero Academia ──
+{t:"My Hero Academia",q:"Which anime follows students at UA High School learning to become heroes?",o:["Demon Slayer","My Hero Academia","Bleach","Black Clover"],a:1},
+{t:"My Hero Academia",q:"What is Deku's real name?",o:["Katsuki Bakugo","Shoto Todoroki","Izuku Midoriya","Tenya Iida"],a:2},
+{t:"My Hero Academia",q:"What Quirk does Bakugo have?",o:["Ice Creation","Explosion","Half-Cold Half-Hot","Engine"],a:1},
+{t:"My Hero Academia",q:"What is All Might's Quirk called?",o:["One For All","All For One","Transfer Quirk","Symbol of Peace"],a:0},
+{t:"My Hero Academia",q:"What school does Deku attend?",o:["Shiketsu High","Ketsubutsu Academy","UA High School","Seiai Academy"],a:2},
+{t:"My Hero Academia",q:"What number hero is Endeavor?",o:["Number 1","Number 2","Number 3","Number 4"],a:1},
+{t:"My Hero Academia",q:"What is Todoroki's Quirk?",o:["Fire only","Ice only","Half-Cold Half-Hot","Thermal Regulation"],a:2},
+{t:"My Hero Academia",q:"Who is the main villain of My Hero Academia?",o:["Shigaraki","Dabi","All For One","Overhaul"],a:2},
+{t:"My Hero Academia",q:"What class does Deku belong to at UA?",o:["Class 1-A","Class 1-B","Class 2-A","General Studies"],a:0},
+{t:"My Hero Academia",q:"What is Uraraka's Quirk?",o:["Zero Gravity","Float","Levitate","Repel"],a:0},
+// ── Demon Slayer ──
+{t:"Demon Slayer",q:"In Demon Slayer, what is the name of Tanjiro's demon sister?",o:["Nezuko","Kanao","Shinobu","Mitsuri"],a:0},
+{t:"Demon Slayer",q:"What breathing style does Tanjiro primarily use?",o:["Flame Breathing","Water Breathing","Thunder Breathing","Wind Breathing"],a:1},
+{t:"Demon Slayer",q:"Who is the leader of the Demon Slayer Corps?",o:["Tanjiro","Rengoku","Kagaya Ubuyashiki","Gyomei"],a:2},
+{t:"Demon Slayer",q:"What is the name of Zenitsu's technique?",o:["Thunderclap and Flash","Water Surface Slash","Hinokami Kagura","Repetition"],a:0},
+{t:"Demon Slayer",q:"What is the main villain's name in Demon Slayer?",o:["Doma","Akaza","Muzan Kibutsuji","Kokushibo"],a:2},
+{t:"Demon Slayer",q:"What does Inosuke always wear on his head?",o:["A wolf mask","A boar head","A demon mask","Nothing"],a:1},
+{t:"Demon Slayer",q:"What is the rank below Hashira in Demon Slayer?",o:["Kanoe","Kinoto","Mizunoto","Taisho"],a:2},
+{t:"Demon Slayer",q:"What time period is Demon Slayer set in?",o:["Edo Period","Meiji Period","Taisho Period","Showa Period"],a:2},
+{t:"Demon Slayer",q:"Who is the Flame Hashira?",o:["Tengen Uzui","Rengoku Kyojuro","Gyomei Himejima","Sanemi"],a:1},
+{t:"Demon Slayer",q:"What are demons weak to?",o:["Fire only","Water only","Sunlight and special blades","Salt"],a:2},
+// ── Bleach ──
+{t:"Bleach",q:"What is the name of Ichigo Kurosaki's Zanpakuto?",o:["Zangetsu","Senbonzakura","Ryujin Jakka","Hyorinmaru"],a:0},
+{t:"Bleach",q:"Which anime features a group called the Espada?",o:["Naruto","One Piece","Bleach","Fairy Tail"],a:2},
+{t:"Bleach",q:"Who is the captain of Squad 13 in Bleach?",o:["Byakuya","Kenpachi","Jushiro Ukitake","Shunsui"],a:2},
+{t:"Bleach",q:"What is Rukia's Zanpakuto ability?",o:["Fire","Ice","Illusion","Gravity"],a:1},
+{t:"Bleach",q:"What are Soul Reapers called in Japanese?",o:["Quincy","Hollow","Shinigami","Arrancar"],a:2},
+{t:"Bleach",q:"What is Ichigo's hollow's name?",o:["White Ichigo","Shiro","Hollow Ichigo (Hichigo)","Zangetsu Dark"],a:2},
+{t:"Bleach",q:"Where do dead souls go in Bleach?",o:["Hueco Mundo","Soul Society","Dangai","The Gate"],a:1},
+{t:"Bleach",q:"What are Aizen's former title and rank?",o:["Captain of Squad 5","Lieutenant of Squad 1","Captain of Squad 9","Vice-Captain of Squad 3"],a:0},
+{t:"Bleach",q:"Uryu Ishida belongs to which clan?",o:["Soul Reaper","Hollow","Quincy","Fullbringer"],a:2},
+{t:"Bleach",q:"What power does Chad (Yasutora Sado) manifest?",o:["Sword of fire","Fullbring energy","Spiritual armor on arms","Lightning bolts"],a:2},
+// ── Misc Easy ──
+{t:"Anime",q:"What sport is featured in Haikyuu!!?",o:["Basketball","Soccer","Baseball","Volleyball"],a:3},
+{t:"Anime",q:"What is the name of the lead character in Sword Art Online?",o:["Asuna","Klein","Kirito","Agil"],a:2},
+{t:"Anime",q:"In Death Note, what supernatural creature gives Light the Death Note?",o:["Demon","Angel","Shinigami","Spirit"],a:2},
+{t:"Anime",q:"What power does Light Yagami gain from the Death Note?",o:["Telekinesis","Ability to kill anyone by writing their name","Predict the future","Control people's actions"],a:1},
+{t:"Anime",q:"In Fullmetal Alchemist, what did Edward Elric lose in human transmutation?",o:["His memory","Left arm and right leg","Both legs","His eyesight"],a:1},
+{t:"Anime",q:"What power does Lelouch possess in Code Geass?",o:["Telekinesis","Geass — absolute obedience","Telepathy","Time manipulation"],a:1},
+{t:"Anime",q:"In Sword Art Online Season 1, what is the name of the virtual world?",o:["ALO","GGO","Aincrad","Underworld"],a:2},
+{t:"Anime",q:"What is the main setting of Fairy Tail?",o:["Magnolia, Fiore","Crocus, Fiore","Edolas","Alvarez"],a:0},
+{t:"Anime",q:"What is the name of the magic guild in Fairy Tail?",o:["Blue Pegasus","Lamia Scale","Sabertooth","Fairy Tail"],a:3},
+{t:"Anime",q:"In Tokyo Ghoul, what is Ken Kaneki's eye color after becoming a half-ghoul?",o:["Red right eye","Blue left eye","Both black","Red left eye"],a:0},
+{t:"Anime",q:"What is Goku's alien race called?",o:["Namekians","Humans","Saiyans","Frieza Race"],a:2},
+{t:"Anime",q:"What is the name of Pikachu's trainer?",o:["Gary","Brock","Ash Ketchum","Misty"],a:2},
+{t:"Anime",q:"In Re:Zero, what special ability does Subaru have?",o:["Time stop","Future sight","Return by Death","Memory erase"],a:2},
+{t:"Anime",q:"Spirited Away was directed by whom?",o:["Makoto Shinkai","Satoshi Kon","Mamoru Oshii","Hayao Miyazaki"],a:3},
+{t:"Anime",q:"What is the name of the virtual game in Sword Art Online Season 2?",o:["ALO","GGO","Aincrad","UnderWorld"],a:1},
+{t:"Anime",q:"What is the Titan Eren transforms into called (his main Titan)?",o:["Attack Titan","Founding Titan","War Hammer Titan","Warhammer Titan"],a:0},
+{t:"Anime",q:"In Black Clover, what magic does Asta have?",o:["Demon magic","Anti-magic","Dark magic","Void magic"],a:1},
+{t:"Anime",q:"What is the name of Naruto's father?",o:["Jiraiya","Hiruzen Sarutobi","Minato Namikaze","Kakashi"],a:2},
+{t:"Anime",q:"In One Punch Man, how many punches does Saitama need to win?",o:["1","5","10","100"],a:0},
+{t:"Anime",q:"In Hunter x Hunter, what is Gon's Nen type?",o:["Transmutation","Enhancement","Emission","Manipulation"],a:1},
+{t:"Anime",q:"What is the name of the hero agency run by All Might?",o:["Agency Plus Ultra","No. 1 Hero Office","All Might Rescue","Symbol of Peace Agency"],a:1},
+{t:"Anime",q:"In Demon Slayer, what does Nezuko keep in her mouth?",o:["A knife","A bamboo muzzle","Nothing","A flower"],a:1},
+{t:"Anime",q:"Who is the author of the Naruto manga?",o:["Eiichiro Oda","Masashi Kishimoto","Tite Kubo","Akira Toriyama"],a:1},
+{t:"Anime",q:"Who is the author of One Piece?",o:["Eiichiro Oda","Masashi Kishimoto","Hajime Isayama","Yoshihiro Togashi"],a:0},
+{t:"Anime",q:"What is the relationship between Natsu and Happy in Fairy Tail?",o:["Master and student","Best friends","Rivals","Brothers"],a:1},
+{t:"Anime",q:"In Jujutsu Kaisen, who is the most powerful sorcerer?",o:["Yuji Itadori","Megumi Fushiguro","Gojo Satoru","Suguru Geto"],a:2},
+{t:"Anime",q:"What does 'anime' literally mean?",o:["Cartoon","Japanese cartoon","Animation (from 'animation')","Drawing"],a:2},
+{t:"Anime",q:"What is the name of the main villain in Naruto Shippuden (final arc)?",o:["Madara","Obito","Kaguya Otsutsuki","Zetsu"],a:2},
+{t:"Anime",q:"What is Dragon Ball Z's sequel series called?",o:["Dragon Ball GT","Dragon Ball Super","Dragon Ball Heroes","Dragon Ball AF"],a:1},
+{t:"Anime",q:"In Bleach, what is the name of the realm where Hollows live?",o:["Soul Society","Dangai","Hueco Mundo","Seireitei"],a:2},
+],
+
+normal:[
+// ── Hunter x Hunter ──
+{t:"Hunter x Hunter",q:"In Hunter x Hunter, what type of Nen does Killua use?",o:["Emission","Transmutation","Enhancement","Manipulation"],a:1},
+{t:"Hunter x Hunter",q:"What is the name of the criminal organization in HxH?",o:["The Phantom Troupe","Akatsuki","ANBU","Genei Ryodan"],a:0},
+{t:"Hunter x Hunter",q:"What is the exam called that tests potential hunters?",o:["Nen Exam","Hunter Exam","Phantom Test","Celestial Trial"],a:1},
+{t:"Hunter x Hunter",q:"Who is Gon's father?",o:["Killua's dad","Ging Freecss","Netero","Leorio"],a:1},
+{t:"Hunter x Hunter",q:"What is the name of the arc involving giant ants?",o:["Yorknew City Arc","Greed Island Arc","Chimera Ant Arc","Dark Continent Arc"],a:2},
+{t:"Hunter x Hunter",q:"What are the six types of Nen?",o:["Enhancement, Emission, Transmutation, Conjuration, Manipulation, Specialization","Strength, Speed, Defense, Attack, Heal, Special","Fire, Water, Earth, Air, Light, Dark","Ki, Chakra, Haki, Mana, Aura, Soul"],a:0},
+{t:"Hunter x Hunter",q:"What is Chrollo Lucilfer's Nen ability?",o:["Bandit's Secret","Skill Hunter","Chain Jail","Godspeed"],a:1},
+{t:"Hunter x Hunter",q:"Who is the chairman of the Hunter Association?",o:["Netero","Cheadle","Pariston","Ging"],a:0},
+{t:"Hunter x Hunter",q:"What is Leorio's dream profession?",o:["Hunter","Doctor","Lawyer","Teacher"],a:1},
+{t:"Hunter x Hunter",q:"Kurapika seeks revenge on which group?",o:["Genthru's Group","The Troupe","Zoldycks","Chimera Ants"],a:1},
+// ── Jujutsu Kaisen ──
+{t:"Jujutsu Kaisen",q:"In Jujutsu Kaisen, what is Gojo Satoru's special technique?",o:["Malevolent Shrine","Infinity — Six Eyes","Domain Expansion: Prison Realm","Divergent Fist"],a:1},
+{t:"Jujutsu Kaisen",q:"What grade is Ryomen Sukuna?",o:["Grade 1","Special Grade","Semi-Special Grade","Grade 2"],a:1},
+{t:"Jujutsu Kaisen",q:"What is Yuji Itadori's superhuman talent?",o:["Cursed energy manipulation","Unnatural physical abilities","Time control","Memory erasing"],a:1},
+{t:"Jujutsu Kaisen",q:"What is Megumi Fushiguro's technique?",o:["Black Flash","Ten Shadows Technique","Hollow Technique","Projection Sorcery"],a:1},
+{t:"Jujutsu Kaisen",q:"Who is Yuji's homeroom teacher?",o:["Nanami","Gojo Satoru","Yaga","Utahime"],a:1},
+{t:"Jujutsu Kaisen",q:"What is Nobara Kugisaki's technique?",o:["Straw doll technique","Shadow binding","Chain prison","Curse prison"],a:0},
+{t:"Jujutsu Kaisen",q:"Sukuna's domain expansion is called?",o:["Chimera Shadow Garden","Unlimited Void","Malevolent Shrine","Coffin of the Iron Mountain"],a:2},
+{t:"Jujutsu Kaisen",q:"What is the name of the cursed spirit organization?",o:["Time Vessel Association","Q","The Perfect Human Order","Disaster Curses group"],a:2},
+{t:"Jujutsu Kaisen",q:"Who created the Death Paintings?",o:["Sukuna","Kenjaku","Noritoshi Kamo","Mahito"],a:1},
+{t:"Jujutsu Kaisen",q:"What is the name of Panda in terms of cursed object type?",o:["Cursed Corpse","Cursed Doll","Mutated cursed spirit","Abrupt mutated corpse"],a:0},
+// ── Fullmetal Alchemist Brotherhood ──
+{t:"FMA Brotherhood",q:"In Fullmetal Alchemist Brotherhood, who is the main antagonist?",o:["Scar","Pride","Father","Envy"],a:2},
+{t:"FMA Brotherhood",q:"What is the human cost of creating a Philosopher's Stone?",o:["Alchemist's lifespan","Massive sacrifice of human lives","One perfect soul","All alkahestry in a region"],a:1},
+{t:"FMA Brotherhood",q:"What is Edward Elric's automail arm made of?",o:["Steel","Titanium","Alkahestry metal","Standard automail alloy"],a:3},
+{t:"FMA Brotherhood",q:"Who is Roy Mustang's loyal subordinate?",o:["Alex Armstrong","Jean Havoc","Riza Hawkeye","Heymans Breda"],a:2},
+{t:"FMA Brotherhood",q:"What are the seven homunculi based on?",o:["Seven deadly sins","Seven virtues","Seven chakras","Seven wonders"],a:0},
+{t:"FMA Brotherhood",q:"What organization controls Amestris?",o:["The Fuhrer's army","The State Military","The Central Command","Homunculi network"],a:1},
+{t:"FMA Brotherhood",q:"What is Alphonse Elric's body like?",o:["Robot","A suit of armor with his soul attached","A ghost","A human body with no soul"],a:1},
+{t:"FMA Brotherhood",q:"What is the ultimate taboo in alchemy?",o:["Transmuting gold","Creating life","Human transmutation","Philosopher's Stone creation"],a:2},
+{t:"FMA Brotherhood",q:"Who is Scar's target?",o:["State Alchemists","Homunculi","Ishvalans","The Fuhrer"],a:0},
+{t:"FMA Brotherhood",q:"What country does FMA Brotherhood primarily take place in?",o:["Xing","Creta","Aerugo","Amestris"],a:3},
+// ── Naruto Shippuden ──
+{t:"Naruto",q:"What organization does Itachi join after leaving the Leaf?",o:["Kara","Sound Village","Akatsuki","Root"],a:2},
+{t:"Naruto",q:"What is the real identity of Tobi in Naruto Shippuden?",o:["Obito Uchiha","Madara Uchiha","Izuna Uchiha","Black Zetsu"],a:0},
+{t:"Naruto",q:"What is Minato's famous technique?",o:["Flying Thunder God","Rasengan","Summoning Technique","Shadow Clone Jutsu"],a:0},
+{t:"Naruto",q:"Which Akatsuki member uses puppets?",o:["Deidara","Sasori","Hidan","Kakuzu"],a:1},
+{t:"Naruto",q:"Who is Pain's true identity?",o:["Jiraiya","Yahiko","Nagato","Obito"],a:2},
+{t:"Naruto",q:"What is Gaara's sand defense called?",o:["Desert Shield","Sand Armor","Shield of Sand","Sand Cocoon"],a:2},
+{t:"Naruto",q:"Who gives Naruto the key to his seal?",o:["Tsunade","Kakashi","Jiraiya","Minato"],a:2},
+{t:"Naruto",q:"What is the Sage of Six Paths' name?",o:["Hamura Otsutsuki","Hagoromo Otsutsuki","Indra Otsutsuki","Ashura Otsutsuki"],a:1},
+{t:"Naruto",q:"What bijuu does Gaara contain?",o:["Four-Tails","One-Tails (Shukaku)","Two-Tails","Three-Tails"],a:1},
+{t:"Naruto",q:"What is the name of Sasuke's first stage curse mark teacher?",o:["Itachi","Orochimaru","Kabuto","Madara"],a:1},
+// ── Dragon Ball Super ──
+{t:"Dragon Ball",q:"In Dragon Ball Super, who is the God of Destruction of Universe 7?",o:["Whis","Champa","Beerus","Grand Priest"],a:2},
+{t:"Dragon Ball",q:"What is the name of Goku's Ultra Instinct transformation?",o:["Ultra Super Saiyan","Ultra Instinct — Mastered","Autonomous Ultra Instinct","God Ultra Form"],a:2},
+{t:"Dragon Ball",q:"Who is the angel of Universe 7?",o:["Vados","Marcarita","Whis","Grand Priest"],a:2},
+{t:"Dragon Ball",q:"What is the name of the Tournament of Power arc villain?",o:["Jiren","Toppo","Dyspo","Kefla"],a:0},
+{t:"Dragon Ball",q:"What race is Frieza?",o:["Saiyan","Changeling/Frost Demon","Namekian","Arcosian"],a:1},
+// ── Bleach (continued) ──
+{t:"Bleach",q:"What is the name of Rukia Kuchiki's Zanpakuto?",o:["Sode no Shirayuki","Zabimaru","Wabisuke","Ashisogi Jizo"],a:0},
+{t:"Bleach",q:"What is the final form of Aizen's Zanpakuto called?",o:["Kyoka Suigetsu final stage","Cocoon of the King","Butterfly Form — Transcended","Ultimate release"],a:1},
+{t:"Bleach",q:"What is a Bankai?",o:["A sword technique","The final release of a Zanpakuto","A Soul Reaper rank","An Arrancar power"],a:1},
+{t:"Bleach",q:"What is Byakuya's Zanpakuto?",o:["Senbonzakura","Hozukimaru","Wabisuke","Tenken"],a:0},
+{t:"Bleach",q:"What is the organization that opposes the Gotei 13?",o:["Los Noches","Vollstandig Order","Wandenreich","Hueco Mundo"],a:2},
+// ── Code Geass ──
+{t:"Code Geass",q:"Who is Lelouch's mother?",o:["Kaguya Sumeragi","Marianne vi Britannia","Euphemia li Britannia","Cornelia li Britannia"],a:1},
+{t:"Code Geass",q:"What nation does Lelouch fight against?",o:["Japan","United Federation","Holy Britannian Empire","Chinese Federation"],a:2},
+{t:"Code Geass",q:"What is Lelouch's alter ego?",o:["Black King","Zero","Phantom","Renegade"],a:1},
+{t:"Code Geass",q:"What is C.C.'s real name hinted to be?",o:["Cecilia","Cassandra","Unknown — her real name is never confirmed","Clara"],a:2},
+// ── Re:Zero ──
+{t:"Re:Zero",q:"What is the name of Emilia's contracted spirit?",o:["Beatrice","Echidna","Puck","Roswaal"],a:2},
+{t:"Re:Zero",q:"What special ability does Subaru have?",o:["Time stop","Future sight","Return by Death","Memory manipulation"],a:2},
+{t:"Re:Zero",q:"Who is the Witch of Greed?",o:["Satella","Echidna","Sekhmet","Minerva"],a:1},
+{t:"Re:Zero",q:"Who is the Witch of Envy?",o:["Echidna","Satella","Typhon","Daphne"],a:1},
+// ── Demon Slayer deeper ──
+{t:"Demon Slayer",q:"What is the name of Kokushibo's technique?",o:["Moon Breathing","Sun Breathing","Star Breathing","Flame Breathing"],a:0},
+{t:"Demon Slayer",q:"Who was Yoriichi Tsugikuni?",o:["First Demon Slayer","Creator of Sun Breathing","Muzan's rival — the strongest Slayer","Both B and C"],a:3},
+{t:"Demon Slayer",q:"How many Upper Moons are there?",o:["3","6","9","12"],a:1},
+{t:"Demon Slayer",q:"What is Tanjiro's earring pattern?",o:["Flame","Checkered","Sun pattern","Wave"],a:0},
+// ── Misc Normal ──
+{t:"Anime",q:"Which anime studio is behind One Punch Man Season 1?",o:["Madhouse","Pierrot","Sunrise","J.C.Staff"],a:0},
+{t:"Anime",q:"In Evangelion, what does NERV's motto roughly translate to?",o:["God's in his Heaven","Man shall not live by bread alone","In the beginning God created","We are the chosen ones"],a:0},
+{t:"Anime",q:"What year was Demon Slayer: Kimetsu no Yaiba first published?",o:["2014","2016","2018","2020"],a:1},
+{t:"Anime",q:"Mob Psycho 100 is created by the same author as?",o:["Assassination Classroom","One Punch Man","Saiki K","Dr. Stone"],a:1},
+{t:"Anime",q:"In AOT, who says 'If you win, you live. If you lose, you die.'?",o:["Levi","Erwin","Hange","Pixis"],a:1},
+{t:"Anime",q:"What Nen type does Hisoka use?",o:["Enhancement","Transmutation","Emission","Manipulation"],a:1},
+{t:"Anime",q:"In One Piece, what type of Haki lets you sense things?",o:["Armament Haki","Observation Haki","Conqueror's Haki","Sea Haki"],a:1},
+{t:"Anime",q:"What is Gojo's Domain Expansion called?",o:["Chimera Shadow Garden","Unlimited Void","Malevolent Shrine","Coffin of the Iron Mountain"],a:1},
+{t:"Anime",q:"In FMA, who guards the Gate of Truth?",o:["A Homunculus","The Gate itself (Truth entity)","Hohenheim","Edward"],a:1},
+{t:"Anime",q:"In One Piece, what is the strongest form of Haki?",o:["Armament","Observation","Conqueror's","Advanced Armament"],a:2},
+{t:"Anime",q:"What is the name of the Death God that follows Light Yagami?",o:["Rem","Ryuk","Sidoh","Gelus"],a:1},
+{t:"Anime",q:"In Code Geass, what does Lelouch use to command an army?",o:["Geass power + Black Knights","Code power","Britannia army secretly","Suzaku's support"],a:0},
+{t:"Anime",q:"In Black Clover, what is Asta's grimoire called?",o:["Four-leaf clover","Five-leaf clover","Six-leaf clover","Three-leaf clover"],a:1},
+{t:"Anime",q:"What power does Rimuru Tempest gain from slimes?",o:["Predation — copy abilities","Slime control","Liquid transformation","Absorption"],a:0},
+{t:"Anime",q:"Who trained Goku when he was young before Dragon Ball?",o:["Master Roshi","Kami","King Kai","Grandpa Gohan"],a:3},
+{t:"Anime",q:"In Jujutsu Kaisen, what triggers a cursed technique reversal?",o:["Negative energy","Reversed cursed energy (positive energy)","Domain Expansion","Six Eyes activation"],a:1},
+{t:"Anime",q:"What is the name of the Straw Hat crew's ship?",o:["Merry Go → Thousand Sunny","Golden Lion","Big Top","Moby Dick"],a:0},
+{t:"Anime",q:"In HxH, what game does Greed Island take place in?",o:["A video game","An isekai world","A Hunter game accessible by Nen users","A dream world"],a:2},
+{t:"Anime",q:"What is the time limit on Gojo's Domain Expansion?",o:["No limit","Several seconds to minutes depending on use","Exactly 0.2 seconds","He sustains it indefinitely"],a:1},
+{t:"Anime",q:"In Vinland Saga Season 1, who is the main antagonist figure?",o:["Thorkell","Askeladd","Canute","Floki"],a:1},
+],
+
+hard:[
+// ── NGE / Evangelion ──
+{t:"Evangelion",q:"In NGE, what is the name of the 17th Angel?",o:["Kaworu Nagisa / Tabris","Ramiel","Sachiel","Leliel"],a:0},
+{t:"Evangelion",q:"The Human Instrumentality Project aims to achieve what?",o:["Defeat all Angels","Merger of all human souls into one","Resurrect Yui Ikari","Evolve beyond AT Field"],a:1},
+{t:"Evangelion",q:"What does 'AT Field' stand for?",o:["Absolute Terror Field","Advanced Technology Field","Anti-Titan Field","Anthropic Transfer Field"],a:0},
+{t:"Evangelion",q:"In The End of Evangelion, what happens during Third Impact?",o:["All Evas are destroyed","Human souls merge into LCL","Angels take over Earth","NERV wins the war"],a:1},
+{t:"Evangelion",q:"What is Rei Ayanami a partial clone of?",o:["Asuka's mother","Yui Ikari","Naoko Akagi","Kyoko Zeppelin Soryu"],a:1},
+{t:"Evangelion",q:"In Evangelion, which Angel has a perfectly symmetrical shadow form?",o:["Sachiel","Leliel","Ramiel","Sahaquiel"],a:1},
+{t:"Evangelion",q:"What is the number of the Eva Unit Shinji pilots?",o:["Unit 00","Unit 01","Unit 02","Unit 03"],a:1},
+{t:"Evangelion",q:"Who is Gendo Ikari's second in command?",o:["Ritsuko","Misato","Fuyutsuki","Keel"],a:2},
+// ── Steins;Gate ──
+{t:"Steins;Gate",q:"In Steins;Gate, what is the divergence number of the true Steins Gate world line?",o:["1.048596","1.130426","1.337280","0.571024"],a:0},
+{t:"Steins;Gate",q:"What does SERN stand for in Steins;Gate?",o:["Science and Engineering Research Network","Société Européenne de Recherche Nucléaire","Synthetic Emergency Research Node","Systematic European Research Network"],a:1},
+{t:"Steins;Gate",q:"What is Okabe Rintaro's self-proclaimed title?",o:["Future Gadget Lab Chief","Mad Scientist","Hououin Kyouma","The Mastermind"],a:2},
+{t:"Steins;Gate",q:"What object does the Future Gadget Lab use as a time machine?",o:["A refrigerator","A phone microwave","A phone booth","A television"],a:1},
+{t:"Steins;Gate",q:"In Steins;Gate 0, what is the name of the AI modeled after Makise Kurisu?",o:["Amadeus","Athena","Kurisu-AI","Chrono"],a:0},
+// ── Hunter x Hunter deep ──
+{t:"Hunter x Hunter",q:"What are Kurapika's three Nen chain conditions?",o:["Speed, Power, Duration","Restrictions to Spiders only; chain use costs life; healing forbidden","Must use Emperor Time; must not use with allies","Uses all 10 fingers simultaneously"],a:1},
+{t:"Hunter x Hunter",q:"What is the name of the Chimera Ant King?",o:["Neferpitou","Meruem","Shaiapouf","Menthuthuyoupi"],a:1},
+{t:"Hunter x Hunter",q:"What is Isaac Netero's ultimate technique?",o:["Zero Hand","100-Type Guanyin Bodhisattva","Poor Man's Rose","Miniature Rose"],a:1},
+{t:"Hunter x Hunter",q:"What is Gon's final Nen transformation called?",o:["Gon's Awakening","Adult Gon — Jajanken Ultimate","Nen Contract","Gon's Vow"],a:0},
+{t:"Hunter x Hunter",q:"What is the name of the Dark Continent expedition committee?",o:["Kakin Expedition","Zodiacs","V5 Beyond Group","Hunter Council"],a:1},
+// ── Berserk ──
+{t:"Berserk",q:"Who is the author of Berserk?",o:["Yoshihiro Togashi","Kentaro Miura","Naoki Urasawa","Junji Ito"],a:1},
+{t:"Berserk",q:"What is the name of Guts' massive sword?",o:["Dragon Slayer","Blade of Hell","God Killer","Iron Rend"],a:0},
+{t:"Berserk",q:"What is the group of God Hand members?",o:["The Apostles","God Hand — 5 members","Skull Knight's Army","Neo-Band of Falcon"],a:1},
+{t:"Berserk",q:"What event triggered Guts' descent into darkness?",o:["The Eclipse","Griffith's betrayal","Casca's death","The Demon Child birth"],a:0},
+{t:"Berserk",q:"What is Griffith's God Hand form called?",o:["Grunbeld","Void","Femto","Conrad"],a:2},
+{t:"Berserk",q:"Guts originally belonged to which mercenary group?",o:["Skull Knight's forces","Band of the Falcon","The Apostles","Kushan Army"],a:1},
+// ── Vinland Saga ──
+{t:"Vinland Saga",q:"In Vinland Saga, who is Thorfinn's father?",o:["Askeladd","Bjorn","Thors","Floki"],a:2},
+{t:"Vinland Saga",q:"In Vinland Saga Season 2, on what farm is Thorfinn a slave?",o:["Ketil's Farm","Leif's Farm","Canute's Manor","Snake's Farm"],a:0},
+{t:"Vinland Saga",q:"What is the name of the legendary land Thorfinn seeks?",o:["Vinland","Valhalla","Miklagard","Jomsburg"],a:0},
+// ── Fate Series ──
+{t:"Fate",q:"In Fate/Zero, what is Kiritsugu Emiya's combat style called?",o:["Magecraft assassination","Mage Killer style","Reinforcement magic","Reality Marble combat"],a:1},
+{t:"Fate",q:"What is the class of Artoria Pendragon in Fate/Stay Night?",o:["Archer","Lancer","Saber","Rider"],a:2},
+{t:"Fate",q:"What is the name of Gilgamesh's ultimate Noble Phantasm?",o:["Ea — Enuma Elish","Gate of Babylon","Caladbolg","Durandal"],a:0},
+{t:"Fate",q:"Who is the Master of Berserker in Fate/Zero?",o:["Kayneth","Tokiomi","Kariya Matou","Kiritsugu"],a:2},
+{t:"Fate",q:"What is Archer's (EMIYA) Noble Phantasm in FSN?",o:["Unlimited Blade Works","Gate of Babylon","Camelot","Excalibur"],a:0},
+// ── Made in Abyss ──
+{t:"Made in Abyss",q:"In Made in Abyss, what is a White Whistle made from?",o:["Rare relics","The corpse of a beloved person","Ancient alloy from the 7th layer","Soul fragments"],a:1},
+{t:"Made in Abyss",q:"What are the curses of the Abyss called?",o:["Curse of the Abyss","The Strains","Abyss Sickness","Layer Curse"],a:0},
+{t:"Made in Abyss",q:"What is the name of Riko's mother?",o:["Lyza the Annihilator","Ozen","Prushka","Bondrewd"],a:0},
+// ── Mushishi ──
+{t:"Mushishi",q:"In Mushishi, what are Mushi?",o:["Spirits of the dead","Ancient life forms closer to life itself","Parasitic demons","Elemental entities"],a:1},
+{t:"Mushishi",q:"Who is the main character of Mushishi?",o:["Yoki","Ginko","Adashino","Tanyuu"],a:1},
+// ── Promised Neverland ──
+{t:"Promised Neverland",q:"In The Promised Neverland, who is the true enemy of the children?",o:["The humans outside","The demon world rulers","Isabella (Mama) — controlled by demons","The demon farmers"],a:3},
+{t:"Promised Neverland",q:"What is the name of the orphanage the children escape from?",o:["Grace Field House","Lambda 7214","Goldy Pond","Glory Bell"],a:0},
+{t:"Promised Neverland",q:"What does the number tattooed on the children represent?",o:["Their birth order","Their ID/shipping number","Their intelligence rank","Their demon quality grade"],a:1},
+// ── Jojo's Bizarre Adventure ──
+{t:"JoJo's Bizarre Adventure",q:"What is the name of DIO's Stand?",o:["Star Platinum","The World","Crazy Diamond","Killer Queen"],a:1},
+{t:"JoJo's Bizarre Adventure",q:"What is the main hero of JoJo Part 3?",o:["Jonathan Joestar","Joseph Joestar","Jotaro Kujo","Giorno Giovanna"],a:2},
+{t:"JoJo's Bizarre Adventure",q:"What does Za Warudo (The World) do?",o:["Create illusions","Stop time","Travel dimensions","Erase memories"],a:1},
+{t:"JoJo's Bizarre Adventure",q:"What body part does Kira Yoshikage have a fetish for?",o:["Eyes","Feet","Hands","Hair"],a:2},
+{t:"JoJo's Bizarre Adventure",q:"What is Giorno Giovanna's Stand called?",o:["Gold Experience Requiem","Crazy Diamond","King Crimson","Purple Haze"],a:0},
+{t:"JoJo's Bizarre Adventure",q:"What is the name of the antagonist in JoJo Part 5?",o:["Diavolo","Enrico Pucci","Yoshikage Kira","Funny Valentine"],a:0},
+// ── Misc Hard ──
+{t:"Anime",q:"In FMA, what is the Philosopher's Stone made from?",o:["Refined alchemy","Human souls","Dragon stones","Red water"],a:1},
+{t:"Anime",q:"What chapter does Attack on Titan manga end on?",o:["Chapter 130","Chapter 139","Chapter 145","Chapter 122"],a:1},
+{t:"Anime",q:"In HxH, what is Gon's power level after the Chimera Ant arc?",o:["He loses all Nen","He gains Specialist Nen","He becomes a Special Grade Hunter","He achieves Godspeed permanently"],a:0},
+{t:"Anime",q:"What is the name of Togashi's other famous manga?",o:["Yu Yu Hakusho","Slam Dunk","Akira","Berserk"],a:0},
+{t:"Anime",q:"In Steins;Gate, what does the butterfly effect primarily affect in the story?",o:["Okabe's memory","The D-Mail divergences","Kurisu's invention","SERN's plans"],a:1},
+{t:"Anime",q:"Who wrote the manga 'Vagabond'?",o:["Naoki Urasawa","Takehiko Inoue","Kentaro Miura","Osamu Tezuka"],a:1},
+{t:"Anime",q:"What is the name of the God of Death in Death Note who drops the notebook?",o:["Rem","Sidoh","Ryuk","Gelus"],a:2},
+{t:"Anime",q:"In Fate/Zero, who summons Gilgamesh?",o:["Kiritsugu","Tokiomi Tohsaka","Kariya","Kayneth"],a:1},
+{t:"Anime",q:"What is the real name of 'Beyond the Boundary' protagonist?",o:["Akihito Kanbara","Mirai Kuriyama","Hiroomi Nase","Izumi Nase"],a:0},
+{t:"Anime",q:"In Fullmetal Alchemist (2003, not Brotherhood), who is the main villain?",o:["Father","Dante","Envy","Pride"],a:1},
+{t:"Anime",q:"What year was the original Fullmetal Alchemist anime released?",o:["2001","2003","2005","2007"],a:1},
+{t:"Anime",q:"Mob Psycho 100 author ONE also wrote which massively popular anime?",o:["Dragon Ball","One Punch Man","Overlord","Saiki K"],a:1},
+{t:"Anime",q:"In Overlord, what is the name of Ainz Ooal Gown's guild headquarters?",o:["Nazarick","Yggdrasil","The Tomb","Great Tomb of Nazarick"],a:3},
+{t:"Anime",q:"In Mushishi, what is Ginko's condition that attracts Mushi?",o:["He emits high Mushi aura","His white hair and green eye attract them","He has no soul","He was born in the Kokai"],a:1},
+{t:"Anime",q:"Who is the author of the JoJo's Bizarre Adventure manga?",o:["Masashi Kishimoto","Hirohiko Araki","Eiichiro Oda","Yoshihiro Togashi"],a:1},
+{t:"Anime",q:"What is the name of Pucci's Stand in JoJo Part 6?",o:["Made in Heaven","Whitesnake","C-Moon","D4C"],a:0},
+{t:"Anime",q:"In Berserk, what does the Brand of Sacrifice cause?",o:["Demons smell Guts","Demons are attracted and attack the branded person","Griffith gains power","Guts becomes immortal"],a:1},
+{t:"Anime",q:"What is the divergence value at which Kurisu dies and WW3 doesn't happen?",o:["Below 1.000000","Above 1.000000","Exactly 0.000000","The Steins Gate line 1.048596"],a:3},
+{t:"Anime",q:"In Made in Abyss, what is the 7th layer called?",o:["The Final Maelstrom","The Unreturned","The Sea of Corpses","The Great Fault"],a:0},
+{t:"Anime",q:"In Vinland Saga, what does Thorfinn's father Thors do for a living before his death?",o:["Merchant","Former Jomsviking turned farmer","Blacksmith","Chieftain"],a:1},
+{t:"Anime",q:"What is the name of the Irregulars' guild in No Game No Life?",o:["Blank","Imanity","Sora & Shiro Inc","Empty"],a:0},
+{t:"Anime",q:"In Death Note, what is L's real name?",o:["Lawliet","L. Lawliet","Ryuzaki Lawliet","His real name is only 'L'"],a:1},
+{t:"Anime",q:"In Code Geass, what does the Zero Requiem plan entail?",o:["Destroying Britannia militarily","Lelouch becoming Emperor then dying — freeing the world","C.C becoming immortal","Suzaku taking the throne"],a:1},
+{t:"Anime",q:"In AOT, what is the name of the Tybur family's War Hammer Titan?",o:["Lara Tybur wields it","Willy Tybur wields it","Both A and B","It is passed down by eating"],a:3},
+{t:"Anime",q:"What does Yuno's grimoire look like?",o:["Three-leaf clover","Four-leaf clover","Five-leaf clover","Six-leaf clover"],a:1},
+{t:"Anime",q:"In Overlord, what class is Ainz Ooal Gown?",o:["Warrior","Paladin","Overlord — Undead-type magic caster","Necromancer"],a:2},
+{t:"Anime",q:"What is the name of Griffith's dream in Berserk?",o:["The Eclipse","His own kingdom","The God Hand","The Beherit"],a:1},
+{t:"Anime",q:"In Steins;Gate, who is Suzuha's father?",o:["Okabe","Daru","Moeka","Mr. Braun"],a:1},
+],
+};
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+const G = {
+  sid:'', role:'', level:'normal',
+  hostName:'', guestName:'',
+  p1score:0, p2score:0,
+  qIndex:0, questions:[],
+  timerInterval:null, timeLeft:20,
+  answered:false,
+  dbRef:null, unsubscribe:null,
+};
+
+// ══════════════════════════════════════════════
 // NAVIGATION
-// ════════════════════════════════════════════════════════
-function goTo(id){
+// ══════════════════════════════════════════════
+window.goTo = function(id){
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
   document.getElementById(id).classList.add('on');
-}
-function resetAll(){clearInterval(G.timerInterval);Object.assign(G,{sid:'',role:'',p1score:0,p2score:0,qIndex:0,questions:[],timeLeft:20,answered:false,started:false,hostName:'',guestName:''});}
+};
 
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // SETUP
-// ════════════════════════════════════════════════════════
-let selLvl='normal';
-function selLevel(l,el){
-  selLvl=l; G.level=l;
+// ══════════════════════════════════════════════
+let selLvl = 'normal';
+window.selLevel = function(l, el){
+  selLvl = l; G.level = l;
   document.querySelectorAll('.btn-level').forEach(b=>b.classList.remove('sel'));
   el.classList.add('sel');
+};
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
 }
 
-function hostServer(){
-  const n=document.getElementById('host-name').value.trim();
+// ══════════════════════════════════════════════
+// HOST SERVER
+// ══════════════════════════════════════════════
+window.hostServer = async function(){
+  const n = document.getElementById('host-name').value.trim();
   if(!n){document.getElementById('host-name').focus();return;}
-  G.hostName=n; G.role='host'; G.level=selLvl;
-  G.sid='qt_'+Math.random().toString(36).substr(2,10)+Date.now().toString(36);
-  G.questions=shuffle([...QB[G.level]]);
-  const sess={
-    host:n,guest:null,level:G.level,
-    status:'lobby',
-    qIndex:0,questions:G.questions,
-    p1score:0,p2score:0,
-    answerLog:{},
-    currentQ:null,qStart:null,
+  G.hostName = n; G.role = 'host'; G.level = selLvl;
+  G.sid = 'qt_'+Math.random().toString(36).substr(2,8)+Date.now().toString(36);
+
+  // Pick 25 random unique questions from level pool
+  const pool = shuffle(QB[G.level]);
+  G.questions = pool.slice(0,25);
+
+  const sessData = {
+    host: n,
+    guest: null,
+    level: G.level,
+    status: 'lobby',
+    qIndex: 0,
+    p1score: 0,
+    p2score: 0,
+    p1answered: -1,
+    p2answered: -1,
+    questions: G.questions,
+    ts: Date.now(),
   };
-  lsSet(G.sid,sess);
-  document.getElementById('lobby-p1-name').textContent=n;
-  document.getElementById('lobby-p2-name').textContent='Waiting for challenger...';
+
+  const sessRef = ref(db, 'sessions/'+G.sid);
+  await set(sessRef, sessData);
+  G.dbRef = sessRef;
+
+  document.getElementById('lobby-p1-name').textContent = n;
+  document.getElementById('lobby-p2-name').textContent = 'Waiting for challenger...';
   document.getElementById('lobby-p2-dot').classList.remove('on');
   document.getElementById('btn-start').classList.remove('ready');
-  const link=location.href.split('#')[0]+'#'+G.sid;
-  document.getElementById('link-txt').textContent=link;
+
+  const link = location.href.split('#')[0]+'#'+G.sid;
+  document.getElementById('link-txt').textContent = link;
   goTo('s-server');
-  pollLobby();
-}
 
-function cpLink(){
-  navigator.clipboard.writeText(document.getElementById('link-txt').textContent).then(()=>{
-    const b=document.getElementById('btn-cp');
-    b.textContent='Copied'; setTimeout(()=>b.textContent='Copy',2000);
-  });
-}
-
-// ════════════════════════════════════════════════════════
-// LOBBY POLLING (host waits for guest)
-// ════════════════════════════════════════════════════════
-let lobbyPoll;
-function pollLobby(){
-  clearInterval(lobbyPoll);
-  lobbyPoll=setInterval(()=>{
-    const s=lsGet(G.sid); if(!s) return;
-    if(s.guest){
-      G.guestName=s.guest;
-      document.getElementById('lobby-p2-name').textContent=s.guest;
+  // Listen for guest joining
+  if(G.unsubscribe) G.unsubscribe();
+  G.unsubscribe = onValue(sessRef, (snap)=>{
+    const s = snap.val();
+    if(!s) return;
+    if(s.guest && s.guest !== document.getElementById('lobby-p2-name').textContent){
+      G.guestName = s.guest;
+      document.getElementById('lobby-p2-name').textContent = s.guest;
       document.getElementById('lobby-p2-name').classList.add('filled');
       document.getElementById('lobby-p2-dot').classList.add('on');
       document.getElementById('btn-start').classList.add('ready');
     }
-    if(s.status==='playing'&&G.role==='guest'){
-      clearInterval(lobbyPoll);
-      enterBattle();
+    if(s.status === 'playing' && G.role === 'host' && document.getElementById('s-battle').classList.contains('on')){
+      // already in battle
     }
-  },2000);
-}
+  });
+};
 
-// ════════════════════════════════════════════════════════
+window.cpLink = function(){
+  navigator.clipboard.writeText(document.getElementById('link-txt').textContent).then(()=>{
+    const b=document.getElementById('btn-cp');
+    b.textContent='Copied'; setTimeout(()=>b.textContent='Copy',2000);
+  });
+};
+
+// ══════════════════════════════════════════════
 // START MATCH (host clicks)
-// ════════════════════════════════════════════════════════
-function startMatch(){
-  clearInterval(lobbyPoll);
-  const s=lsGet(G.sid);
-  if(!s||!s.guest){return;}
-  s.status='playing'; s.qIndex=0; s.p1score=0; s.p2score=0;
-  s.answerLog={}; s.currentQ=0; s.qStart=Date.now();
-  lsSet(G.sid,s);
-  G.questions=s.questions;
-  enterBattle();
-}
+// ══════════════════════════════════════════════
+window.startMatch = async function(){
+  const sessRef = ref(db,'sessions/'+G.sid);
+  const snap = await get(sessRef);
+  const s = snap.val();
+  if(!s||!s.guest) return;
 
-// ════════════════════════════════════════════════════════
-// JOIN FLOW
-// ════════════════════════════════════════════════════════
-function checkJoinMode(){
-  const hash=location.hash.slice(1);
-  if(!hash.startsWith('qt_'))return;
-  const s=lsGet(hash);
-  if(!s){document.body.innerHTML='<div style="color:var(--muted);text-align:center;padding:80px 24px;font-family:Rajdhani,sans-serif;font-size:1.1rem;">This session has expired or does not exist.<br><br><a href="'+location.pathname+'" style="color:var(--gold);font-family:Orbitron,monospace;font-size:0.6rem;letter-spacing:3px;">CREATE YOUR OWN</a></div>';return;}
-  G.sid=hash; G.role='guest';
-  document.getElementById('join-host-label').textContent='Hosted by '+s.host;
-  goTo('s-join');
-}
+  await update(sessRef,{
+    status:'playing', qIndex:0, p1score:0, p2score:0,
+    p1answered:-1, p2answered:-1, qStartTs: Date.now()
+  });
 
-function joinMatch(){
-  const n=document.getElementById('join-name').value.trim();
-  if(!n){document.getElementById('join-name').focus();return;}
-  G.guestName=n;
-  const s=lsGet(G.sid);
-  if(!s){alert('Session not found. Ask host to reshare link.');return;}
-  s.guest=n; lsSet(G.sid,s);
-  G.level=s.level;
-  G.questions=s.questions;
-  // go to battle screen and wait for host to start
-  goTo('s-battle');
-  setupBattleUI(s.host,n);
-  showWait('Host is starting the match...');
-  pollForStart();
-}
-
-let startPoll;
-function pollForStart(){
-  clearInterval(startPoll);
-  startPoll=setInterval(()=>{
-    const s=lsGet(G.sid); if(!s) return;
-    if(s.status==='playing'){
-      clearInterval(startPoll);
-      G.questions=s.questions;
-      G.hostName=s.host; G.guestName=s.guest;
-      hideWait();
-      loadQuestion(0);
-    }
-  },1500);
-}
-
-// ════════════════════════════════════════════════════════
-// BATTLE
-// ════════════════════════════════════════════════════════
-function enterBattle(){
-  const s=lsGet(G.sid);
-  G.hostName=s.host; G.guestName=s.guest;
-  G.questions=s.questions;
-  setupBattleUI(s.host,s.guest);
+  G.questions = s.questions;
+  G.p1score = 0; G.p2score = 0;
+  setupBattleUI(s.host, s.guest);
   goTo('s-battle');
   hideWait();
+  listenBattle();
   loadQuestion(0);
+};
+
+// ══════════════════════════════════════════════
+// JOIN FLOW
+// ══════════════════════════════════════════════
+function checkJoinMode(){
+  const hash = location.hash.slice(1);
+  if(!hash.startsWith('qt_')) return;
+  G.sid = hash; G.role = 'guest';
+
+  const sessRef = ref(db,'sessions/'+G.sid);
+  get(sessRef).then(snap=>{
+    const s = snap.val();
+    if(!s){
+      document.body.innerHTML='<div style="color:var(--muted);text-align:center;padding:80px 24px;font-family:Rajdhani,sans-serif;font-size:1.1rem;">This session has expired or does not exist.<br><br><a href="'+location.pathname+'" style="color:var(--gold);font-family:Orbitron,monospace;font-size:0.6rem;letter-spacing:3px;">CREATE YOUR OWN</a></div>';
+      return;
+    }
+    document.getElementById('join-host-label').textContent = 'Hosted by '+s.host;
+    goTo('s-join');
+  });
 }
 
+window.joinMatch = async function(){
+  const n = document.getElementById('join-name').value.trim();
+  if(!n){document.getElementById('join-name').focus();return;}
+  G.guestName = n;
+
+  const sessRef = ref(db,'sessions/'+G.sid);
+  const snap = await get(sessRef);
+  const s = snap.val();
+  if(!s){alert('Session not found. Ask host to reshare link.');return;}
+
+  G.hostName = s.host;
+  G.level = s.level;
+  G.questions = s.questions;
+  G.dbRef = sessRef;
+
+  await update(sessRef,{guest: n});
+
+  goTo('s-battle');
+  setupBattleUI(s.host, n);
+  showWait('Waiting for host to start the match...');
+  G.p1score = 0; G.p2score = 0;
+
+  // Listen for match start
+  if(G.unsubscribe) G.unsubscribe();
+  G.unsubscribe = onValue(sessRef,(snap)=>{
+    const ss = snap.val();
+    if(!ss) return;
+    if(ss.status === 'playing'){
+      G.questions = ss.questions;
+      hideWait();
+      listenBattle();
+      loadQuestion(ss.qIndex||0);
+    }
+    if(ss.status === 'done'){
+      G.p1score = ss.p1score||0;
+      G.p2score = ss.p2score||0;
+      showResult();
+    }
+  });
+};
+
+// ══════════════════════════════════════════════
+// BATTLE LISTENER (real-time sync)
+// ══════════════════════════════════════════════
+function listenBattle(){
+  const sessRef = ref(db,'sessions/'+G.sid);
+  if(G.unsubscribe) G.unsubscribe();
+  G.unsubscribe = onValue(sessRef,(snap)=>{
+    const s = snap.val();
+    if(!s) return;
+
+    // Sync scores display
+    document.getElementById('b-p1-score').textContent = s.p1score||0;
+    document.getElementById('b-p2-score').textContent = s.p2score||0;
+    document.getElementById('prog-p1').style.width = Math.min(100,((s.p1score||0)/250)*100)+'%';
+    document.getElementById('prog-p2').style.width = Math.min(100,((s.p2score||0)/250)*100)+'%';
+    G.p1score = s.p1score||0;
+    G.p2score = s.p2score||0;
+
+    if(s.status === 'done'){
+      clearInterval(G.timerInterval);
+      setTimeout(showResult, 800);
+    }
+
+    // Advance question when both answered (host controls)
+    if(G.role === 'host' &&
+       s.qIndex === G.qIndex &&
+       s.p1answered !== -1 && s.p2answered !== -1 &&
+       s.status === 'playing'){
+      // both answered
+    }
+  });
+}
+
+// ══════════════════════════════════════════════
+// BATTLE UI
+// ══════════════════════════════════════════════
 function setupBattleUI(p1,p2){
-  document.getElementById('b-p1-name').textContent=p1;
-  document.getElementById('b-p2-name').textContent=p2;
-  document.getElementById('b-p1-score').textContent='0';
-  document.getElementById('b-p2-score').textContent='0';
+  document.getElementById('b-p1-name').textContent = p1;
+  document.getElementById('b-p2-name').textContent = p2;
+  document.getElementById('b-p1-score').textContent = '0';
+  document.getElementById('b-p2-score').textContent = '0';
 }
 
 function loadQuestion(idx){
-  G.qIndex=idx; G.answered=false;
-  const q=G.questions[idx];
-  document.getElementById('q-num').textContent=(idx+1)+'/25';
-  document.getElementById('q-badge').textContent=q.t==='Famous'?'Famous Anime':'Inner Anime';
-  document.getElementById('q-text').textContent=q.q;
-  // progress bars (based on score vs max possible)
-  const maxPts=idx*10||1;
-  document.getElementById('prog-p1').style.width=Math.min(100,(G.p1score/(25*10))*100)+'%';
-  document.getElementById('prog-p2').style.width=Math.min(100,(G.p2score/(25*10))*100)+'%';
-  // render options
-  const grid=document.getElementById('opts-grid');
-  grid.innerHTML='';
+  G.qIndex = idx; G.answered = false;
+  const q = G.questions[idx];
+  document.getElementById('q-num').textContent = (idx+1)+'/25';
+  document.getElementById('q-badge').textContent = q.t;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('prog-p1').style.width = Math.min(100,(G.p1score/250)*100)+'%';
+  document.getElementById('prog-p2').style.width = Math.min(100,(G.p2score/250)*100)+'%';
+
+  const grid = document.getElementById('opts-grid');
+  grid.innerHTML = '';
   q.o.forEach((opt,i)=>{
-    const b=document.createElement('button');
-    b.className='opt-btn'; b.textContent=opt;
-    b.onclick=()=>answerQ(i,q.a,b);
+    const b = document.createElement('button');
+    b.className = 'opt-btn'; b.textContent = opt;
+    b.onclick = ()=>answerQ(i, q.a, b);
     grid.appendChild(b);
   });
-  startTimer(q.a);
-  // status
-  document.getElementById('battle-status').textContent='Question '+(idx+1)+' — '+q.t+' Category';
+
+  document.getElementById('battle-status').textContent = 'Q'+(idx+1)+' — '+q.t;
+  startTimer(q.a, idx);
 }
 
-const CIRCUM=2*Math.PI*24; // r=24 -> 150.8
-function startTimer(correctIdx){
+const CIRCUM = 2*Math.PI*24;
+function startTimer(correctIdx, qIdx){
   clearInterval(G.timerInterval);
-  G.timeLeft=20;
-  const ring=document.getElementById('timer-ring');
-  const num=document.getElementById('timer-num');
-  ring.style.strokeDashoffset=0;
-  ring.style.stroke='var(--red)';
-  num.textContent=20;
-  G.timerInterval=setInterval(()=>{
+  G.timeLeft = 20;
+  const ring = document.getElementById('timer-ring');
+  const num = document.getElementById('timer-num');
+  ring.style.strokeDashoffset = 0;
+  ring.style.stroke = 'var(--red)';
+  num.textContent = 20;
+
+  G.timerInterval = setInterval(()=>{
     G.timeLeft--;
-    num.textContent=G.timeLeft;
-    const offset=CIRCUM*(1-G.timeLeft/20);
-    ring.style.strokeDashoffset=offset;
-    if(G.timeLeft<=5) ring.style.stroke='var(--gold)';
+    num.textContent = G.timeLeft;
+    ring.style.strokeDashoffset = CIRCUM*(1-G.timeLeft/20);
+    if(G.timeLeft<=5) ring.style.stroke = 'var(--gold)';
     if(G.timeLeft<=0){
       clearInterval(G.timerInterval);
-      if(!G.answered) revealAndNext(null,correctIdx);
+      if(!G.answered) revealAndNext(null, correctIdx, qIdx);
     }
   },1000);
 }
 
-function answerQ(chosen,correct,btn){
-  if(G.answered)return;
-  G.answered=true;
+function answerQ(chosen, correct, btn){
+  if(G.answered) return;
+  G.answered = true;
   clearInterval(G.timerInterval);
-  const isRight=chosen===correct;
-  if(isRight){
-    btn.classList.add('correct');
-    if(G.role==='host'){G.p1score+=10; document.getElementById('b-p1-score').textContent=G.p1score;}
-    else{G.p2score+=10; document.getElementById('b-p2-score').textContent=G.p2score;}
+  const isRight = chosen === correct;
+
+  if(isRight){ btn.classList.add('correct'); }
+  else { btn.classList.add('wrong'); }
+
+  // Save answer to Firebase
+  const sessRef = ref(db,'sessions/'+G.sid);
+  const updates = {};
+  if(G.role === 'host'){
+    updates.p1answered = chosen;
+    if(isRight){ updates.p1score = G.p1score + 10; G.p1score += 10; }
   } else {
-    btn.classList.add('wrong');
+    updates.p2answered = chosen;
+    if(isRight){ updates.p2score = G.p2score + 10; G.p2score += 10; }
   }
-  revealAndNext(chosen,correct);
+  update(sessRef, updates);
+
+  revealAndNext(chosen, correct, G.qIndex);
 }
 
-function revealAndNext(chosen,correct){
-  // reveal correct
-  const btns=document.querySelectorAll('.opt-btn');
-  btns.forEach((b,i)=>{b.disabled=true; if(i===correct&&chosen!==correct) b.classList.add('reveal-correct');});
-  // save answer to LS
-  const s=lsGet(G.sid); if(s){
-    if(!s.answerLog) s.answerLog={};
-    const key=G.qIndex+'_'+G.role;
-    if(!s.answerLog[key]){
-      s.answerLog[key]=chosen===correct;
-      if(G.role==='host'){s.p1score=G.p1score;}
-      else{s.p2score=G.p2score;}
-    }
-    lsSet(G.sid,s);
-  }
-  // wait then next
-  setTimeout(()=>{
-    if(G.qIndex<24){
-      // sync scores from LS
-      const ss=lsGet(G.sid);
-      if(ss){
-        if(G.role==='host'){G.p2score=ss.p2score||0;}
-        else{G.p1score=ss.p1score||0;}
-        document.getElementById('b-p1-score').textContent=G.p1score;
-        document.getElementById('b-p2-score').textContent=G.p2score;
+function revealAndNext(chosen, correct, qIdx){
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach((b,i)=>{
+    b.disabled = true;
+    if(i === correct && chosen !== correct) b.classList.add('reveal-correct');
+  });
+
+  setTimeout(async ()=>{
+    if(qIdx < 24){
+      const nextIdx = qIdx + 1;
+      if(G.role === 'host'){
+        const sessRef = ref(db,'sessions/'+G.sid);
+        await update(sessRef,{qIndex: nextIdx, p1answered:-1, p2answered:-1, qStartTs: Date.now()});
       }
-      loadQuestion(G.qIndex+1);
+      // Guest waits for Firebase update OR host proceeds — both load next question
+      loadQuestion(nextIdx);
     } else {
       endGame();
     }
-  },1800);
+  }, 1800);
 }
 
-function endGame(){
+async function endGame(){
   clearInterval(G.timerInterval);
-  // Sync final scores
-  const s=lsGet(G.sid);
-  if(s){
-    s.status='done';
-    if(G.role==='host') s.p1score=G.p1score;
-    else s.p2score=G.p2score;
-    lsSet(G.sid,s);
-    // Wait for other player's final score
-    setTimeout(()=>{
-      const ss=lsGet(G.sid);
-      if(ss){
-        if(G.role==='host') G.p2score=ss.p2score||G.p2score;
-        else G.p1score=ss.p1score||G.p1score;
-      }
-      showResult();
-    },2000);
-  } else { showResult(); }
+  const sessRef = ref(db,'sessions/'+G.sid);
+  const updates = {status:'done'};
+  if(G.role==='host') updates.p1score = G.p1score;
+  else updates.p2score = G.p2score;
+  await update(sessRef, updates);
+
+  setTimeout(async ()=>{
+    const snap = await get(sessRef);
+    const s = snap.val();
+    if(s){ G.p1score = s.p1score||G.p1score; G.p2score = s.p2score||G.p2score; }
+    showResult();
+  }, 1500);
 }
 
 function showResult(){
-  const p1=G.hostName; const p2=G.guestName;
-  const s1=G.p1score; const s2=G.p2score;
-  document.getElementById('res-p1-name').textContent=p1;
-  document.getElementById('res-p2-name').textContent=p2;
-  document.getElementById('res-p1-pts').textContent=s1;
-  document.getElementById('res-p2-pts').textContent=s2;
-  let win='';
-  if(s1>s2){win=p1+' Wins!'; launchConfetti();}
-  else if(s2>s1){win=p2+' Wins!'; launchConfetti();}
-  else{win='Draw — Rematch?';}
-  document.getElementById('winner-badge').textContent=win;
-  document.getElementById('res-detail').textContent=
-    'Correct answers: '+Math.round(s1/10)+' vs '+Math.round(s2/10)+' out of 25 questions';
+  if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
+  document.getElementById('res-p1-name').textContent = G.hostName;
+  document.getElementById('res-p2-name').textContent = G.guestName;
+  document.getElementById('res-p1-pts').textContent = G.p1score;
+  document.getElementById('res-p2-pts').textContent = G.p2score;
+  let win = '';
+  if(G.p1score > G.p2score){ win = G.hostName+' Wins!'; launchConfetti(); }
+  else if(G.p2score > G.p1score){ win = G.guestName+' Wins!'; launchConfetti(); }
+  else { win = 'Draw — Rematch?'; }
+  document.getElementById('winner-badge').textContent = win;
+  document.getElementById('res-detail').textContent =
+    'Correct: '+Math.round(G.p1score/10)+' vs '+Math.round(G.p2score/10)+' out of 25';
   goTo('s-result');
 }
 
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // WAIT OVERLAY
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 function showWait(msg){
-  const o=document.getElementById('wait-overlay');
-  document.getElementById('wait-msg').textContent=msg||'Please wait...';
-  o.style.display='flex';
+  const o = document.getElementById('wait-overlay');
+  document.getElementById('wait-msg').textContent = msg||'Please wait...';
+  o.style.display = 'flex';
 }
 function hideWait(){
-  document.getElementById('wait-overlay').style.display='none';
+  document.getElementById('wait-overlay').style.display = 'none';
 }
 
-// ════════════════════════════════════════════════════════
-// LS HELPERS
-// ════════════════════════════════════════════════════════
-function lsSet(k,v){localStorage.setItem(k,JSON.stringify(v));}
-function lsGet(k){try{return JSON.parse(localStorage.getItem(k));}catch{return null;}}
+// ══════════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════════
+window.resetAll = function(){
+  clearInterval(G.timerInterval);
+  if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
+  Object.assign(G,{sid:'',role:'',p1score:0,p2score:0,qIndex:0,questions:[],timeLeft:20,answered:false,hostName:'',guestName:'',dbRef:null});
+  location.hash = '';
+};
 
-// ════════════════════════════════════════════════════════
-// UTILS
-// ════════════════════════════════════════════════════════
-function shuffle(arr){
-  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
-  return arr;
-}
+window.leaveSession = function(){
+  if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
+  location.hash = '';
+};
 
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // CONFETTI
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 function launchConfetti(){
-  const cv=document.getElementById('cc');
-  const cx=cv.getContext('2d');
-  cv.width=innerWidth; cv.height=innerHeight;
-  const cols=['#e8181f','#f5c842','#00e5ff','#ff4444','#ffd966','#39ff6e'];
-  let pts=Array.from({length:120},()=>({
-    x:Math.random()*cv.width,y:-10,
-    vx:(Math.random()-.5)*6,vy:Math.random()*5+2,
-    w:Math.random()*10+4,h:Math.random()*5+3,
+  const cv = document.getElementById('cc');
+  const cx = cv.getContext('2d');
+  cv.width = innerWidth; cv.height = innerHeight;
+  const cols = ['#e8181f','#f5c842','#00e5ff','#ff4444','#ffd966','#39ff6e'];
+  let pts = Array.from({length:120},()=>({
+    x:Math.random()*cv.width, y:-10,
+    vx:(Math.random()-.5)*6, vy:Math.random()*5+2,
+    w:Math.random()*10+4, h:Math.random()*5+3,
     c:cols[Math.floor(Math.random()*cols.length)],
-    r:Math.random()*360,rv:(Math.random()-.5)*8
+    r:Math.random()*360, rv:(Math.random()-.5)*8
   }));
-  let f=0;
+  let f = 0;
   function draw(){
     cx.clearRect(0,0,cv.width,cv.height);
     pts.forEach(p=>{
@@ -950,11 +1065,11 @@ function launchConfetti(){
   draw();
 }
 
-// ════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════
 // INIT
-// ════════════════════════════════════════════════════════
-G.level=selLvl;
+// ══════════════════════════════════════════════
 checkJoinMode();
+
 </script>
 </body>
 </html>
