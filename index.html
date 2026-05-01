@@ -34,6 +34,16 @@ mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
 background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 .scr>*{position:relative;z-index:1;}
 
+/* ROTATING STAR */
+.corner-star{
+  position:fixed;bottom:14px;right:14px;
+  width:18px;height:18px;z-index:9999;
+  animation:starSpin 4s linear infinite;
+  opacity:0.35;pointer-events:none;
+}
+.corner-star svg{width:100%;height:100%;}
+@keyframes starSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
 /* LANDING */
 #s-land{background:radial-gradient(ellipse 100% 80% at 50% 0%,#1a0204 0%,var(--dark) 65%);gap:28px;text-align:center;}
 .land-katana{width:200px;height:3px;background:linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent);margin:0 auto;position:relative;}
@@ -104,7 +114,7 @@ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='htt
 .vs-sep{font-family:'Bebas Neue',display;font-size:1.4rem;color:rgba(255,255,255,0.2);letter-spacing:2px;}
 .prog-wrap{width:100%;max-width:700px;display:flex;gap:8px;align-items:center;}
 .prog-bar-outer{flex:1;height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
-.prog-bar-inner{height:100%;border-radius:2px;transition:width 1s linear;}
+.prog-bar-inner{height:100%;border-radius:2px;transition:width 0.5s ease;}
 .p1 .prog-bar-inner{background:linear-gradient(90deg,var(--red),var(--gold));}
 .p2 .prog-bar-inner{background:linear-gradient(90deg,var(--cyan),#7b2fff);}
 .q-counter{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:3px;color:var(--muted);}
@@ -122,11 +132,15 @@ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='htt
 .opt-btn:disabled{cursor:default;}
 .opt-btn.correct{background:rgba(57,255,110,0.15)!important;border-color:var(--green)!important;color:var(--green)!important;}
 .opt-btn.wrong{background:rgba(232,24,31,0.15)!important;border-color:var(--red)!important;color:var(--red)!important;}
-.opt-btn.reveal-correct{background:rgba(57,255,110,0.1)!important;border-color:rgba(57,255,110,0.4)!important;}
-.wait-overlay{position:absolute;inset:0;background:rgba(8,9,13,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:10;border-radius:4px;}
+.opt-btn.reveal-correct{background:rgba(57,255,110,0.1)!important;border-color:rgba(57,255,110,0.4)!important;color:rgba(57,255,110,0.8)!important;}
+.wait-overlay{position:absolute;inset:0;background:rgba(8,9,13,0.92);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:10;border-radius:4px;}
 .wait-spinner{width:40px;height:40px;border-radius:50%;border:2px solid rgba(232,24,31,0.2);border-top-color:var(--red);animation:spin 1s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .wait-txt{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:4px;color:var(--muted);animation:blink 1.5s infinite;}
+.answered-indicator{display:flex;gap:8px;justify-content:center;margin-top:4px;}
+.ai-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);transition:all 0.3s;}
+.ai-dot.done{background:var(--green);border-color:var(--green);box-shadow:0 0 6px var(--green);}
+.ai-dot.label{width:auto;background:none;border:none;font-family:'Orbitron',monospace;font-size:0.4rem;letter-spacing:2px;color:var(--muted);}
 
 /* RESULT */
 #s-result{background:radial-gradient(ellipse 80% 60% at 50% 15%,#1a0204,var(--dark) 65%);gap:28px;text-align:center;}
@@ -139,7 +153,7 @@ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='htt
 .btn-back{position:absolute;top:20px;left:20px;background:transparent;border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.3);padding:8px 16px;border-radius:2px;cursor:pointer;font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;z-index:10;}
 .btn-back:hover{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);}
 #cc{position:fixed;inset:0;pointer-events:none;z-index:9999;}
-.firebase-status{position:fixed;bottom:12px;right:12px;font-family:'Orbitron',monospace;font-size:0.4rem;letter-spacing:2px;color:rgba(255,255,255,0.15);z-index:9998;}
+.firebase-status{position:fixed;bottom:36px;right:14px;font-family:'Orbitron',monospace;font-size:0.4rem;letter-spacing:2px;color:rgba(255,255,255,0.15);z-index:9998;}
 .firebase-status.connected{color:rgba(57,255,110,0.4);}
 .firebase-status.error{color:rgba(232,24,31,0.5);}
 </style>
@@ -147,6 +161,13 @@ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='htt
 <body>
 <canvas id="cc"></canvas>
 <div class="firebase-status" id="fb-status">FIREBASE CONNECTING...</div>
+
+<!-- Tiny rotating star bottom-right -->
+<div class="corner-star">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="12,2 14.5,9.5 22,9.5 16,14.5 18.5,22 12,17.5 5.5,22 8,14.5 2,9.5 9.5,9.5" fill="rgba(245,200,66,0.7)" stroke="rgba(245,200,66,0.4)" stroke-width="0.5"/>
+  </svg>
+</div>
 
 <!-- SCREEN 1 — LANDING -->
 <div class="scr on" id="s-land">
@@ -293,10 +314,10 @@ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='htt
   <div class="q-card" style="position:relative;">
     <div class="wait-overlay" id="wait-overlay">
       <div class="wait-spinner"></div>
-      <div class="wait-txt" id="wait-msg">Connecting to Firebase...</div>
+      <div class="wait-txt" id="wait-msg">Connecting...</div>
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;">
-      <div class="q-badge" id="q-badge">Famous Anime</div>
+      <div class="q-badge" id="q-badge">Anime</div>
       <div class="timer-ring-wrap">
         <svg class="timer-ring-svg" viewBox="0 0 56 56">
           <circle class="timer-ring-bg" cx="28" cy="28" r="24"/>
@@ -307,6 +328,13 @@ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='htt
     </div>
     <div class="q-text" id="q-text">Question loading...</div>
     <div class="opts-grid" id="opts-grid"></div>
+    <!-- Who has answered indicator -->
+    <div class="answered-indicator" id="ans-indicator">
+      <span class="ai-dot label" id="ans-p1-label">P1</span>
+      <span class="ai-dot" id="ans-p1-dot"></span>
+      <span class="ai-dot" id="ans-p2-dot"></span>
+      <span class="ai-dot label" id="ans-p2-label">P2</span>
+    </div>
   </div>
   <div style="font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:3px;color:var(--muted);" id="battle-status">—</div>
 </div>
@@ -355,9 +383,10 @@ const fbStatus = document.getElementById('fb-status');
 fbStatus.textContent = '● FIREBASE CONNECTED';
 fbStatus.classList.add('connected');
 
-// ══════════════════════════════════════════════
-// QUESTION BANK — 1000+ questions across levels
-// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════════
+// QUESTION BANK — 1200+ questions across difficulty levels
+// 1 point per correct answer. 25 questions per match.
+// ══════════════════════════════════════════════════════════════════════
 const QB = {
 easy:[
 // ── Naruto ──
@@ -371,72 +400,85 @@ easy:[
 {t:"Naruto",q:"What color is Naruto's jumpsuit?",o:["Blue","Green","Orange","Red"],a:2},
 {t:"Naruto",q:"Who is Naruto's rival?",o:["Rock Lee","Neji","Sasuke","Gaara"],a:2},
 {t:"Naruto",q:"What is Sakura's main skill?",o:["Speed","Genjutsu","Medical Ninjutsu","Wind Release"],a:2},
+{t:"Naruto",q:"Who is Naruto's father?",o:["Jiraiya","Hiruzen","Minato Namikaze","Kakashi"],a:2},
+{t:"Naruto",q:"What is the name of Naruto's mother?",o:["Tsunade","Kushina Uzumaki","Mei Terumi","Konan"],a:1},
+{t:"Naruto",q:"What animal does Naruto summon?",o:["Snake","Toad","Slug","Dog"],a:1},
+{t:"Naruto",q:"What are the eye powers of the Uchiha clan called?",o:["Byakugan","Rinnegan","Sharingan","Tenseigan"],a:2},
+{t:"Naruto",q:"What village does Gaara lead?",o:["Cloud","Mist","Sand","Rock"],a:2},
+{t:"Naruto",q:"What is Rock Lee unable to use?",o:["Taijutsu","Ninjutsu and Genjutsu","Chakra","Weapons"],a:1},
+{t:"Naruto",q:"Who is the Fifth Hokage?",o:["Kakashi","Tsunade","Orochimaru","Jiraiya"],a:1},
+{t:"Naruto",q:"What is the name of Naruto's son?",o:["Himawari","Bolt/Boruto","Menma","Kawaki"],a:1},
+{t:"Naruto",q:"Which Legendary Sannin trains Naruto?",o:["Orochimaru","Tsunade","Jiraiya","Kabuto"],a:2},
+{t:"Naruto",q:"What is the Leaf Village's symbol?",o:["A spiral","A leaf","A swirl","A flame"],a:1},
 // ── Dragon Ball ──
 {t:"Dragon Ball",q:"In Dragon Ball Z, what transformation does Goku first achieve against Frieza?",o:["Super Saiyan","Super Saiyan 2","Super Saiyan God","Ultra Instinct"],a:0},
 {t:"Dragon Ball",q:"What is the name of Goku's son?",o:["Vegeta","Piccolo","Gohan","Trunks"],a:2},
-{t:"Dragon Ball",q:"What planet does Frieza destroy in DBZ?",o:["Earth","Namek","Planet Vegeta","Kanassa"],a:2},
 {t:"Dragon Ball",q:"Who is Goku's main rival in DBZ?",o:["Frieza","Cell","Majin Buu","Vegeta"],a:3},
 {t:"Dragon Ball",q:"What are the 7 magical orbs called?",o:["Dragon Stones","Eternal Orbs","Dragon Balls","Power Gems"],a:2},
-{t:"Dragon Ball",q:"What does Goku's Scouter read when he first sees Raditz?",o:["480","920","1000","210"],a:1},
-{t:"Dragon Ball",q:"What is the name of Vegeta's home planet?",o:["Frieza Planet","Namek","Planet Vegeta","Saiyan Prime"],a:2},
-{t:"Dragon Ball",q:"Which technique does Piccolo use to regenerate limbs?",o:["Saiyan Cells","Namekian Healing","Special Beam Cannon Recoil","Ki Regeneration"],a:1},
 {t:"Dragon Ball",q:"What color is a Super Saiyan's hair?",o:["White","Blue","Silver","Golden/Yellow"],a:3},
-{t:"Dragon Ball",q:"What is Gohan's student name at school?",o:["Mark","Gohan Jr","Eric","Barry"],a:0},
+{t:"Dragon Ball",q:"What is Goku's alien race called?",o:["Namekians","Humans","Saiyans","Frieza Race"],a:2},
+{t:"Dragon Ball",q:"What is the name of Vegeta's home planet?",o:["Frieza Planet","Namek","Planet Vegeta","Saiyan Prime"],a:2},
+{t:"Dragon Ball",q:"What does Goku love most to do?",o:["Sleep","Train and fight","Eat","Farm"],a:1},
+{t:"Dragon Ball",q:"Who created the Dragon Balls on Namek?",o:["Kami","Grand Elder Guru","King Kai","Dende"],a:1},
+{t:"Dragon Ball",q:"What is the name of Goku's signature attack?",o:["Final Flash","Kamehameha","Special Beam Cannon","Galick Gun"],a:1},
+{t:"Dragon Ball",q:"What does Super Saiyan 3 Goku look like?",o:["No eyebrows, very long hair","Blue hair, short","White hair","Red hair"],a:0},
+{t:"Dragon Ball",q:"What is Vegeta's prince title?",o:["Prince of Namek","Prince of all Saiyans","Prince of Earth","King of Saiyans"],a:1},
+{t:"Dragon Ball",q:"Who trained Goku at Kami's Lookout?",o:["King Kai","Mr. Popo and Kami","Piccolo","Master Roshi"],a:1},
+{t:"Dragon Ball",q:"What is the name of the machine that measures power levels?",o:["Power Meter","Ki Reader","Scouter","Combat Scanner"],a:2},
 // ── One Piece ──
 {t:"One Piece",q:"What fruit gives Luffy his rubber powers?",o:["Flare-Flare Fruit","Gum-Gum Fruit","Dark-Dark Fruit","String-String Fruit"],a:1},
 {t:"One Piece",q:"What is the name of Luffy's pirate crew?",o:["Heart Pirates","Whitebeard Pirates","Straw Hat Pirates","Red Hair Pirates"],a:2},
 {t:"One Piece",q:"Who is the swordsman of the Straw Hat Pirates?",o:["Sanji","Usopp","Zoro","Franky"],a:2},
 {t:"One Piece",q:"What does Luffy want to become?",o:["Pirate Admiral","King of the Pirates","Greatest Swordsman","Warlord"],a:1},
 {t:"One Piece",q:"What is Nami's role in the crew?",o:["Cook","Doctor","Navigator","Musician"],a:2},
-{t:"One Piece",q:"Where do the Straw Hats first enter the Grand Line?",o:["Loguetown","Reverse Mountain","Twin Capes","Marineford"],a:1},
 {t:"One Piece",q:"Who is the cook of the Straw Hat Pirates?",o:["Zoro","Sanji","Franky","Brook"],a:1},
 {t:"One Piece",q:"What is the treasure everyone seeks in One Piece?",o:["The Devil Fruit","The One Piece","The Void Century","The Ancient Weapons"],a:1},
-{t:"One Piece",q:"Who trained Luffy for 2 years on Ruskaina island?",o:["Shanks","Rayleigh","Garp","Whitebeard"],a:1},
 {t:"One Piece",q:"Chopper ate which Devil Fruit?",o:["Gomu Gomu no Mi","Mera Mera no Mi","Hito Hito no Mi","Yomi Yomi no Mi"],a:2},
+{t:"One Piece",q:"What is Zoro's goal?",o:["Become Pirate King","Find the One Piece","Become the World's Greatest Swordsman","Become a Marine Admiral"],a:2},
+{t:"One Piece",q:"Who is the doctor of the Straw Hat Pirates?",o:["Nami","Tony Tony Chopper","Robin","Usopp"],a:1},
+{t:"One Piece",q:"What is Robin's Devil Fruit ability?",o:["Make flowers bloom","Sprout body parts anywhere","Control water","Turn invisible"],a:1},
+{t:"One Piece",q:"How many swords does Zoro use?",o:["One","Two","Three","Four"],a:2},
+{t:"One Piece",q:"What is the name of the first ship of the Straw Hats?",o:["Thousand Sunny","Going Merry","Oro Jackson","Moby Dick"],a:1},
+{t:"One Piece",q:"What is Usopp's dream?",o:["Become a great swordsman","Become a brave warrior of the sea","Become King of the Pirates","Draw a map of the world"],a:1},
 // ── Attack on Titan ──
 {t:"Attack on Titan",q:"What anime features Titans who eat humans and a walled civilization?",o:["Tokyo Ghoul","Attack on Titan","Demon Slayer","Vinland Saga"],a:1},
 {t:"Attack on Titan",q:"What is Eren Yeager's father's name?",o:["Zeke","Grisha","Rod","Reiner"],a:1},
 {t:"Attack on Titan",q:"What regiment does Eren join?",o:["Military Police","Garrison","Survey Corps","Training Corps"],a:2},
 {t:"Attack on Titan",q:"Who is Eren's childhood best friend (male)?",o:["Jean","Connie","Armin","Reiner"],a:2},
-{t:"Attack on Titan",q:"What is the name of the giant Colossal Titan that breached Wall Maria?",o:["Armored Titan","Colossal Titan","Female Titan","Beast Titan"],a:1},
-{t:"Attack on Titan",q:"Who is Mikasa related to (ancient warrior clan)?",o:["Eldians","Ackermann clan","Marleyans","Fritz bloodline"],a:1},
 {t:"Attack on Titan",q:"What three walls protect humanity?",o:["Rose, Sina, Maria","Alpha, Beta, Gamma","I, II, III","Inner, Middle, Outer"],a:0},
 {t:"Attack on Titan",q:"What device do soldiers use to move through the air?",o:["Omni-Gear","Wings of Freedom","Thunder Spears","ODM Gear"],a:3},
-{t:"Attack on Titan",q:"Who was the previous holder of the Attack Titan before Eren?",o:["Zeke Yeager","Grisha Yeager","Keith Shadis","Daz"],a:1},
-{t:"Attack on Titan",q:"What is the name of Levi's squad initially?",o:["Special Operations Squad","Titan Exterminators","Survey Elite","Wall Rose Unit"],a:0},
+{t:"Attack on Titan",q:"Who is Mikasa's close friend and love interest?",o:["Armin","Jean","Eren","Levi"],a:2},
+{t:"Attack on Titan",q:"What is the name of the giant Colossal Titan that breached Wall Maria?",o:["Armored Titan","Colossal Titan","Female Titan","Beast Titan"],a:1},
+{t:"Attack on Titan",q:"Who is the commander of the Survey Corps in early AOT?",o:["Levi","Erwin Smith","Pixis","Shadis"],a:1},
+{t:"Attack on Titan",q:"What does AOT stand for?",o:["Attack of Titans","Assault on Titans","Attack on Titan","Army of Titans"],a:2},
 // ── My Hero Academia ──
-{t:"My Hero Academia",q:"Which anime follows students at UA High School learning to become heroes?",o:["Demon Slayer","My Hero Academia","Bleach","Black Clover"],a:1},
-{t:"My Hero Academia",q:"What is Deku's real name?",o:["Katsuki Bakugo","Shoto Todoroki","Izuku Midoriya","Tenya Iida"],a:2},
 {t:"My Hero Academia",q:"What Quirk does Bakugo have?",o:["Ice Creation","Explosion","Half-Cold Half-Hot","Engine"],a:1},
 {t:"My Hero Academia",q:"What is All Might's Quirk called?",o:["One For All","All For One","Transfer Quirk","Symbol of Peace"],a:0},
 {t:"My Hero Academia",q:"What school does Deku attend?",o:["Shiketsu High","Ketsubutsu Academy","UA High School","Seiai Academy"],a:2},
-{t:"My Hero Academia",q:"What number hero is Endeavor?",o:["Number 1","Number 2","Number 3","Number 4"],a:1},
 {t:"My Hero Academia",q:"What is Todoroki's Quirk?",o:["Fire only","Ice only","Half-Cold Half-Hot","Thermal Regulation"],a:2},
 {t:"My Hero Academia",q:"Who is the main villain of My Hero Academia?",o:["Shigaraki","Dabi","All For One","Overhaul"],a:2},
 {t:"My Hero Academia",q:"What class does Deku belong to at UA?",o:["Class 1-A","Class 1-B","Class 2-A","General Studies"],a:0},
 {t:"My Hero Academia",q:"What is Uraraka's Quirk?",o:["Zero Gravity","Float","Levitate","Repel"],a:0},
+{t:"My Hero Academia",q:"What is Deku's real name?",o:["Katsuki Bakugo","Shoto Todoroki","Izuku Midoriya","Tenya Iida"],a:2},
+{t:"My Hero Academia",q:"What is Iida's Quirk?",o:["Engine","Speed Force","Jet Legs","Turbo"],a:0},
+{t:"My Hero Academia",q:"What does UA stand for?",o:["Ultimate Academy","Universal Arena","Yuuei (UA) High School","United Allies"],a:2},
 // ── Demon Slayer ──
-{t:"Demon Slayer",q:"In Demon Slayer, what is the name of Tanjiro's demon sister?",o:["Nezuko","Kanao","Shinobu","Mitsuri"],a:0},
+{t:"Demon Slayer",q:"What is the name of Tanjiro's demon sister?",o:["Nezuko","Kanao","Shinobu","Mitsuri"],a:0},
 {t:"Demon Slayer",q:"What breathing style does Tanjiro primarily use?",o:["Flame Breathing","Water Breathing","Thunder Breathing","Wind Breathing"],a:1},
-{t:"Demon Slayer",q:"Who is the leader of the Demon Slayer Corps?",o:["Tanjiro","Rengoku","Kagaya Ubuyashiki","Gyomei"],a:2},
-{t:"Demon Slayer",q:"What is the name of Zenitsu's technique?",o:["Thunderclap and Flash","Water Surface Slash","Hinokami Kagura","Repetition"],a:0},
 {t:"Demon Slayer",q:"What is the main villain's name in Demon Slayer?",o:["Doma","Akaza","Muzan Kibutsuji","Kokushibo"],a:2},
 {t:"Demon Slayer",q:"What does Inosuke always wear on his head?",o:["A wolf mask","A boar head","A demon mask","Nothing"],a:1},
-{t:"Demon Slayer",q:"What is the rank below Hashira in Demon Slayer?",o:["Kanoe","Kinoto","Mizunoto","Taisho"],a:2},
 {t:"Demon Slayer",q:"What time period is Demon Slayer set in?",o:["Edo Period","Meiji Period","Taisho Period","Showa Period"],a:2},
 {t:"Demon Slayer",q:"Who is the Flame Hashira?",o:["Tengen Uzui","Rengoku Kyojuro","Gyomei Himejima","Sanemi"],a:1},
 {t:"Demon Slayer",q:"What are demons weak to?",o:["Fire only","Water only","Sunlight and special blades","Salt"],a:2},
+{t:"Demon Slayer",q:"What does Nezuko keep in her mouth?",o:["A knife","A bamboo muzzle","Nothing","A flower"],a:1},
+{t:"Demon Slayer",q:"What is Zenitsu's technique?",o:["Thunderclap and Flash","Water Surface Slash","Hinokami Kagura","Repetition"],a:0},
+{t:"Demon Slayer",q:"Who is the leader of the Demon Slayer Corps?",o:["Tanjiro","Rengoku","Kagaya Ubuyashiki","Gyomei"],a:2},
 // ── Bleach ──
 {t:"Bleach",q:"What is the name of Ichigo Kurosaki's Zanpakuto?",o:["Zangetsu","Senbonzakura","Ryujin Jakka","Hyorinmaru"],a:0},
-{t:"Bleach",q:"Which anime features a group called the Espada?",o:["Naruto","One Piece","Bleach","Fairy Tail"],a:2},
-{t:"Bleach",q:"Who is the captain of Squad 13 in Bleach?",o:["Byakuya","Kenpachi","Jushiro Ukitake","Shunsui"],a:2},
-{t:"Bleach",q:"What is Rukia's Zanpakuto ability?",o:["Fire","Ice","Illusion","Gravity"],a:1},
 {t:"Bleach",q:"What are Soul Reapers called in Japanese?",o:["Quincy","Hollow","Shinigami","Arrancar"],a:2},
-{t:"Bleach",q:"What is Ichigo's hollow's name?",o:["White Ichigo","Shiro","Hollow Ichigo (Hichigo)","Zangetsu Dark"],a:2},
 {t:"Bleach",q:"Where do dead souls go in Bleach?",o:["Hueco Mundo","Soul Society","Dangai","The Gate"],a:1},
-{t:"Bleach",q:"What are Aizen's former title and rank?",o:["Captain of Squad 5","Lieutenant of Squad 1","Captain of Squad 9","Vice-Captain of Squad 3"],a:0},
-{t:"Bleach",q:"Uryu Ishida belongs to which clan?",o:["Soul Reaper","Hollow","Quincy","Fullbringer"],a:2},
-{t:"Bleach",q:"What power does Chad (Yasutora Sado) manifest?",o:["Sword of fire","Fullbring energy","Spiritual armor on arms","Lightning bolts"],a:2},
+{t:"Bleach",q:"What is Rukia's Zanpakuto ability?",o:["Fire","Ice","Illusion","Gravity"],a:1},
+{t:"Bleach",q:"Who is the main character of Bleach?",o:["Renji Abarai","Rukia Kuchiki","Ichigo Kurosaki","Uryu Ishida"],a:2},
 // ── Misc Easy ──
 {t:"Anime",q:"What sport is featured in Haikyuu!!?",o:["Basketball","Soccer","Baseball","Volleyball"],a:3},
 {t:"Anime",q:"What is the name of the lead character in Sword Art Online?",o:["Asuna","Klein","Kirito","Agil"],a:2},
@@ -444,35 +486,35 @@ easy:[
 {t:"Anime",q:"What power does Light Yagami gain from the Death Note?",o:["Telekinesis","Ability to kill anyone by writing their name","Predict the future","Control people's actions"],a:1},
 {t:"Anime",q:"In Fullmetal Alchemist, what did Edward Elric lose in human transmutation?",o:["His memory","Left arm and right leg","Both legs","His eyesight"],a:1},
 {t:"Anime",q:"What power does Lelouch possess in Code Geass?",o:["Telekinesis","Geass — absolute obedience","Telepathy","Time manipulation"],a:1},
-{t:"Anime",q:"In Sword Art Online Season 1, what is the name of the virtual world?",o:["ALO","GGO","Aincrad","Underworld"],a:2},
-{t:"Anime",q:"What is the main setting of Fairy Tail?",o:["Magnolia, Fiore","Crocus, Fiore","Edolas","Alvarez"],a:0},
-{t:"Anime",q:"What is the name of the magic guild in Fairy Tail?",o:["Blue Pegasus","Lamia Scale","Sabertooth","Fairy Tail"],a:3},
-{t:"Anime",q:"In Tokyo Ghoul, what is Ken Kaneki's eye color after becoming a half-ghoul?",o:["Red right eye","Blue left eye","Both black","Red left eye"],a:0},
-{t:"Anime",q:"What is Goku's alien race called?",o:["Namekians","Humans","Saiyans","Frieza Race"],a:2},
-{t:"Anime",q:"What is the name of Pikachu's trainer?",o:["Gary","Brock","Ash Ketchum","Misty"],a:2},
+{t:"Anime",q:"In Fairy Tail, what is the name of the main magic guild?",o:["Blue Pegasus","Lamia Scale","Sabertooth","Fairy Tail"],a:3},
+{t:"Anime",q:"In Tokyo Ghoul, what is Ken Kaneki?",o:["A vampire","A half-ghoul","A full ghoul","A demon"],a:1},
 {t:"Anime",q:"In Re:Zero, what special ability does Subaru have?",o:["Time stop","Future sight","Return by Death","Memory erase"],a:2},
 {t:"Anime",q:"Spirited Away was directed by whom?",o:["Makoto Shinkai","Satoshi Kon","Mamoru Oshii","Hayao Miyazaki"],a:3},
-{t:"Anime",q:"What is the name of the virtual game in Sword Art Online Season 2?",o:["ALO","GGO","Aincrad","UnderWorld"],a:1},
-{t:"Anime",q:"What is the Titan Eren transforms into called (his main Titan)?",o:["Attack Titan","Founding Titan","War Hammer Titan","Warhammer Titan"],a:0},
 {t:"Anime",q:"In Black Clover, what magic does Asta have?",o:["Demon magic","Anti-magic","Dark magic","Void magic"],a:1},
-{t:"Anime",q:"What is the name of Naruto's father?",o:["Jiraiya","Hiruzen Sarutobi","Minato Namikaze","Kakashi"],a:2},
 {t:"Anime",q:"In One Punch Man, how many punches does Saitama need to win?",o:["1","5","10","100"],a:0},
-{t:"Anime",q:"In Hunter x Hunter, what is Gon's Nen type?",o:["Transmutation","Enhancement","Emission","Manipulation"],a:1},
-{t:"Anime",q:"What is the name of the hero agency run by All Might?",o:["Agency Plus Ultra","No. 1 Hero Office","All Might Rescue","Symbol of Peace Agency"],a:1},
-{t:"Anime",q:"In Demon Slayer, what does Nezuko keep in her mouth?",o:["A knife","A bamboo muzzle","Nothing","A flower"],a:1},
 {t:"Anime",q:"Who is the author of the Naruto manga?",o:["Eiichiro Oda","Masashi Kishimoto","Tite Kubo","Akira Toriyama"],a:1},
 {t:"Anime",q:"Who is the author of One Piece?",o:["Eiichiro Oda","Masashi Kishimoto","Hajime Isayama","Yoshihiro Togashi"],a:0},
-{t:"Anime",q:"What is the relationship between Natsu and Happy in Fairy Tail?",o:["Master and student","Best friends","Rivals","Brothers"],a:1},
 {t:"Anime",q:"In Jujutsu Kaisen, who is the most powerful sorcerer?",o:["Yuji Itadori","Megumi Fushiguro","Gojo Satoru","Suguru Geto"],a:2},
-{t:"Anime",q:"What does 'anime' literally mean?",o:["Cartoon","Japanese cartoon","Animation (from 'animation')","Drawing"],a:2},
-{t:"Anime",q:"What is the name of the main villain in Naruto Shippuden (final arc)?",o:["Madara","Obito","Kaguya Otsutsuki","Zetsu"],a:2},
 {t:"Anime",q:"What is Dragon Ball Z's sequel series called?",o:["Dragon Ball GT","Dragon Ball Super","Dragon Ball Heroes","Dragon Ball AF"],a:1},
 {t:"Anime",q:"In Bleach, what is the name of the realm where Hollows live?",o:["Soul Society","Dangai","Hueco Mundo","Seireitei"],a:2},
+{t:"Anime",q:"What is Pikachu's trainer's name?",o:["Gary","Brock","Ash Ketchum","Misty"],a:2},
+{t:"Anime",q:"What is the main city in Naruto called?",o:["Sunagakure","Konoha (Hidden Leaf)","Kumogakure","Kirigakure"],a:1},
+{t:"Anime",q:"In Sword Art Online Season 1, what is the name of the virtual world?",o:["ALO","GGO","Aincrad","Underworld"],a:2},
+{t:"Anime",q:"What is the name of the protagonist in Attack on Titan?",o:["Levi Ackermann","Mikasa Ackermann","Eren Yeager","Armin Arlert"],a:2},
+{t:"Anime",q:"In My Hero Academia, what are superpowers called?",o:["Stands","Quirks","Abilities","Powers"],a:1},
+{t:"Anime",q:"What color is Luffy's straw hat?",o:["Brown","Yellow","Red","White"],a:0},
+{t:"Anime",q:"What is Gon's best friend's name in Hunter x Hunter?",o:["Leorio","Kurapika","Killua","Hisoka"],a:2},
+{t:"Anime",q:"In Demon Slayer, what does Tanjiro use to fight?",o:["A katana (Nichirin sword)","A spear","Magic spells","A bow"],a:0},
+{t:"Anime",q:"What is the full name of FMA Brotherhood?",o:["Full Metal Alchemist Brotherhood","Fullmetal Alchemist: Brotherhood","Full Metal: Alchemist Brotherhood","Fullmetal Alchemist Brotherhood"],a:1},
+{t:"Anime",q:"What is Natsu's magic in Fairy Tail?",o:["Ice Make","Fire Dragon Slayer Magic","Lightning Magic","Requip Magic"],a:1},
+{t:"Anime",q:"Who is Naruto's godfather?",o:["Kakashi","Iruka","Jiraiya","Hiruzen"],a:2},
+{t:"Anime",q:"In One Piece, who gave Luffy his straw hat?",o:["Garp","Shanks","Roger","Whitebeard"],a:1},
+{t:"Anime",q:"What is the name of Ichigo's human form sword?",o:["Zangetsu","Shikai","Bankai","Tensa Zangetsu"],a:0},
 ],
 
 normal:[
 // ── Hunter x Hunter ──
-{t:"Hunter x Hunter",q:"In Hunter x Hunter, what type of Nen does Killua use?",o:["Emission","Transmutation","Enhancement","Manipulation"],a:1},
+{t:"Hunter x Hunter",q:"What type of Nen does Killua use?",o:["Emission","Transmutation","Enhancement","Manipulation"],a:1},
 {t:"Hunter x Hunter",q:"What is the name of the criminal organization in HxH?",o:["The Phantom Troupe","Akatsuki","ANBU","Genei Ryodan"],a:0},
 {t:"Hunter x Hunter",q:"What is the exam called that tests potential hunters?",o:["Nen Exam","Hunter Exam","Phantom Test","Celestial Trial"],a:1},
 {t:"Hunter x Hunter",q:"Who is Gon's father?",o:["Killua's dad","Ging Freecss","Netero","Leorio"],a:1},
@@ -482,27 +524,32 @@ normal:[
 {t:"Hunter x Hunter",q:"Who is the chairman of the Hunter Association?",o:["Netero","Cheadle","Pariston","Ging"],a:0},
 {t:"Hunter x Hunter",q:"What is Leorio's dream profession?",o:["Hunter","Doctor","Lawyer","Teacher"],a:1},
 {t:"Hunter x Hunter",q:"Kurapika seeks revenge on which group?",o:["Genthru's Group","The Troupe","Zoldycks","Chimera Ants"],a:1},
+{t:"Hunter x Hunter",q:"What is Killua's family profession?",o:["Merchants","Assassins","Hunters","Soldiers"],a:1},
+{t:"Hunter x Hunter",q:"What Nen type does Hisoka use?",o:["Enhancement","Transmutation","Emission","Manipulation"],a:1},
+{t:"Hunter x Hunter",q:"What is Gon's Nen type?",o:["Transmutation","Enhancement","Emission","Manipulation"],a:1},
+{t:"Hunter x Hunter",q:"What is the name of Killua's special Nen technique involving electricity?",o:["Thunder Palm","Godspeed","Killua's Aura","Lightning Speed"],a:1},
+{t:"Hunter x Hunter",q:"Where is the Zoldyck family estate located?",o:["Meteor City","Kukuroo Mountain","York New","Greed Island"],a:1},
 // ── Jujutsu Kaisen ──
-{t:"Jujutsu Kaisen",q:"In Jujutsu Kaisen, what is Gojo Satoru's special technique?",o:["Malevolent Shrine","Infinity — Six Eyes","Domain Expansion: Prison Realm","Divergent Fist"],a:1},
+{t:"Jujutsu Kaisen",q:"What is Gojo Satoru's special technique?",o:["Malevolent Shrine","Infinity — Six Eyes","Domain Expansion: Prison Realm","Divergent Fist"],a:1},
 {t:"Jujutsu Kaisen",q:"What grade is Ryomen Sukuna?",o:["Grade 1","Special Grade","Semi-Special Grade","Grade 2"],a:1},
-{t:"Jujutsu Kaisen",q:"What is Yuji Itadori's superhuman talent?",o:["Cursed energy manipulation","Unnatural physical abilities","Time control","Memory erasing"],a:1},
 {t:"Jujutsu Kaisen",q:"What is Megumi Fushiguro's technique?",o:["Black Flash","Ten Shadows Technique","Hollow Technique","Projection Sorcery"],a:1},
 {t:"Jujutsu Kaisen",q:"Who is Yuji's homeroom teacher?",o:["Nanami","Gojo Satoru","Yaga","Utahime"],a:1},
 {t:"Jujutsu Kaisen",q:"What is Nobara Kugisaki's technique?",o:["Straw doll technique","Shadow binding","Chain prison","Curse prison"],a:0},
 {t:"Jujutsu Kaisen",q:"Sukuna's domain expansion is called?",o:["Chimera Shadow Garden","Unlimited Void","Malevolent Shrine","Coffin of the Iron Mountain"],a:2},
-{t:"Jujutsu Kaisen",q:"What is the name of the cursed spirit organization?",o:["Time Vessel Association","Q","The Perfect Human Order","Disaster Curses group"],a:2},
-{t:"Jujutsu Kaisen",q:"Who created the Death Paintings?",o:["Sukuna","Kenjaku","Noritoshi Kamo","Mahito"],a:1},
-{t:"Jujutsu Kaisen",q:"What is the name of Panda in terms of cursed object type?",o:["Cursed Corpse","Cursed Doll","Mutated cursed spirit","Abrupt mutated corpse"],a:0},
+{t:"Jujutsu Kaisen",q:"What is Panda in terms of cursed object type?",o:["Cursed Corpse","Cursed Doll","Mutated cursed spirit","Abrupt mutated corpse"],a:0},
+{t:"Jujutsu Kaisen",q:"What is the name of the school Yuji attends?",o:["Shibuya High","Tokyo Jujutsu High","Kyoto Jujutsu High","Sendai Jujutsu High"],a:1},
+{t:"Jujutsu Kaisen",q:"Who is Yuji Itadori's grandfather?",o:["Masamichi Yaga","Wasuke Itadori","Suguru Geto","Kento Nanami"],a:1},
+{t:"Jujutsu Kaisen",q:"What is a cursed technique that uses black flash?",o:["A Hollow Technique","A sudden release of cursed energy amplification","A domain expansion","A barrier technique"],a:1},
 // ── Fullmetal Alchemist Brotherhood ──
-{t:"FMA Brotherhood",q:"In Fullmetal Alchemist Brotherhood, who is the main antagonist?",o:["Scar","Pride","Father","Envy"],a:2},
+{t:"FMA Brotherhood",q:"Who is the main antagonist in Fullmetal Alchemist Brotherhood?",o:["Scar","Pride","Father","Envy"],a:2},
 {t:"FMA Brotherhood",q:"What is the human cost of creating a Philosopher's Stone?",o:["Alchemist's lifespan","Massive sacrifice of human lives","One perfect soul","All alkahestry in a region"],a:1},
-{t:"FMA Brotherhood",q:"What is Edward Elric's automail arm made of?",o:["Steel","Titanium","Alkahestry metal","Standard automail alloy"],a:3},
 {t:"FMA Brotherhood",q:"Who is Roy Mustang's loyal subordinate?",o:["Alex Armstrong","Jean Havoc","Riza Hawkeye","Heymans Breda"],a:2},
 {t:"FMA Brotherhood",q:"What are the seven homunculi based on?",o:["Seven deadly sins","Seven virtues","Seven chakras","Seven wonders"],a:0},
-{t:"FMA Brotherhood",q:"What organization controls Amestris?",o:["The Fuhrer's army","The State Military","The Central Command","Homunculi network"],a:1},
 {t:"FMA Brotherhood",q:"What is Alphonse Elric's body like?",o:["Robot","A suit of armor with his soul attached","A ghost","A human body with no soul"],a:1},
 {t:"FMA Brotherhood",q:"What is the ultimate taboo in alchemy?",o:["Transmuting gold","Creating life","Human transmutation","Philosopher's Stone creation"],a:2},
-{t:"FMA Brotherhood",q:"Who is Scar's target?",o:["State Alchemists","Homunculi","Ishvalans","The Fuhrer"],a:0},
+{t:"FMA Brotherhood",q:"What is Roy Mustang's alchemy specialty?",o:["Ice alchemy","Flame alchemy","Earth alchemy","Wind alchemy"],a:1},
+{t:"FMA Brotherhood",q:"What is the Law of Equivalent Exchange?",o:["To gain, you must give something equal in return","Everything has a price","Power requires sacrifice","Truth must be balanced"],a:0},
+{t:"FMA Brotherhood",q:"Who is the homunculus Wrath in FMAB?",o:["King Bradley — Fuhrer of Amestris","Selim Bradley","Sloth","Greed"],a:0},
 {t:"FMA Brotherhood",q:"What country does FMA Brotherhood primarily take place in?",o:["Xing","Creta","Aerugo","Amestris"],a:3},
 // ── Naruto Shippuden ──
 {t:"Naruto",q:"What organization does Itachi join after leaving the Leaf?",o:["Kara","Sound Village","Akatsuki","Root"],a:2},
@@ -511,58 +558,75 @@ normal:[
 {t:"Naruto",q:"Which Akatsuki member uses puppets?",o:["Deidara","Sasori","Hidan","Kakuzu"],a:1},
 {t:"Naruto",q:"Who is Pain's true identity?",o:["Jiraiya","Yahiko","Nagato","Obito"],a:2},
 {t:"Naruto",q:"What is Gaara's sand defense called?",o:["Desert Shield","Sand Armor","Shield of Sand","Sand Cocoon"],a:2},
-{t:"Naruto",q:"Who gives Naruto the key to his seal?",o:["Tsunade","Kakashi","Jiraiya","Minato"],a:2},
 {t:"Naruto",q:"What is the Sage of Six Paths' name?",o:["Hamura Otsutsuki","Hagoromo Otsutsuki","Indra Otsutsuki","Ashura Otsutsuki"],a:1},
 {t:"Naruto",q:"What bijuu does Gaara contain?",o:["Four-Tails","One-Tails (Shukaku)","Two-Tails","Three-Tails"],a:1},
-{t:"Naruto",q:"What is the name of Sasuke's first stage curse mark teacher?",o:["Itachi","Orochimaru","Kabuto","Madara"],a:1},
+{t:"Naruto",q:"What is Sasuke's first stage curse mark teacher?",o:["Itachi","Orochimaru","Kabuto","Madara"],a:1},
+{t:"Naruto",q:"What is Kakashi's Sharingan eye technique?",o:["Amaterasu","Kamui","Tsukuyomi","Susanoo"],a:1},
 // ── Dragon Ball Super ──
-{t:"Dragon Ball",q:"In Dragon Ball Super, who is the God of Destruction of Universe 7?",o:["Whis","Champa","Beerus","Grand Priest"],a:2},
+{t:"Dragon Ball",q:"Who is the God of Destruction of Universe 7?",o:["Whis","Champa","Beerus","Grand Priest"],a:2},
 {t:"Dragon Ball",q:"What is the name of Goku's Ultra Instinct transformation?",o:["Ultra Super Saiyan","Ultra Instinct — Mastered","Autonomous Ultra Instinct","God Ultra Form"],a:2},
 {t:"Dragon Ball",q:"Who is the angel of Universe 7?",o:["Vados","Marcarita","Whis","Grand Priest"],a:2},
 {t:"Dragon Ball",q:"What is the name of the Tournament of Power arc villain?",o:["Jiren","Toppo","Dyspo","Kefla"],a:0},
 {t:"Dragon Ball",q:"What race is Frieza?",o:["Saiyan","Changeling/Frost Demon","Namekian","Arcosian"],a:1},
+{t:"Dragon Ball",q:"What is the name of Vegeta's Super Saiyan Blue technique?",o:["Final Flash Blue","Galick Gun Blue","Final Explosion","Evolved Super Saiyan Blue"],a:3},
+{t:"Dragon Ball",q:"Who is Universe 6's Saiyan warrior?",o:["Hit","Cabba","Frost","Kefla"],a:1},
 // ── Bleach (continued) ──
 {t:"Bleach",q:"What is the name of Rukia Kuchiki's Zanpakuto?",o:["Sode no Shirayuki","Zabimaru","Wabisuke","Ashisogi Jizo"],a:0},
-{t:"Bleach",q:"What is the final form of Aizen's Zanpakuto called?",o:["Kyoka Suigetsu final stage","Cocoon of the King","Butterfly Form — Transcended","Ultimate release"],a:1},
 {t:"Bleach",q:"What is a Bankai?",o:["A sword technique","The final release of a Zanpakuto","A Soul Reaper rank","An Arrancar power"],a:1},
 {t:"Bleach",q:"What is Byakuya's Zanpakuto?",o:["Senbonzakura","Hozukimaru","Wabisuke","Tenken"],a:0},
 {t:"Bleach",q:"What is the organization that opposes the Gotei 13?",o:["Los Noches","Vollstandig Order","Wandenreich","Hueco Mundo"],a:2},
+{t:"Bleach",q:"What is Aizen's Zanpakuto ability?",o:["Perfect illusion","Fire control","Space manipulation","Time stop"],a:0},
+{t:"Bleach",q:"What form does Ichigo achieve using Hollow powers?",o:["Bankai form","Fullbring","Visored/Hollow Mask","Final Getsuga Tensho"],a:2},
+{t:"Bleach",q:"What is Kenpachi Zaraki's squad?",o:["Squad 11","Squad 6","Squad 12","Squad 10"],a:0},
+// ── One Piece Normal ──
+{t:"One Piece",q:"What type of Haki lets you sense things?",o:["Armament Haki","Observation Haki","Conqueror's Haki","Sea Haki"],a:1},
+{t:"One Piece",q:"What is the strongest form of Haki?",o:["Armament","Observation","Conqueror's","Advanced Armament"],a:2},
+{t:"One Piece",q:"Who trained Luffy for 2 years on Ruskaina island?",o:["Shanks","Rayleigh","Garp","Whitebeard"],a:1},
+{t:"One Piece",q:"What is the name of the Straw Hat crew's second ship?",o:["Merry Go","Thousand Sunny","Golden Lion","Moby Dick"],a:1},
+{t:"One Piece",q:"Who is the Yonko known as the 'Strongest Creature'?",o:["Shanks","Whitebeard","Kaido","Big Mom"],a:2},
+{t:"One Piece",q:"What is Sanji's epithet?",o:["Demon Leg Sanji","Black Leg Sanji","Flaming Sanji","Raid Suit Sanji"],a:1},
+{t:"One Piece",q:"What island does the story begin on?",o:["Foosha Village (Dawn Island)","Loguetown","Twin Capes","Whiskey Peak"],a:0},
 // ── Code Geass ──
 {t:"Code Geass",q:"Who is Lelouch's mother?",o:["Kaguya Sumeragi","Marianne vi Britannia","Euphemia li Britannia","Cornelia li Britannia"],a:1},
 {t:"Code Geass",q:"What nation does Lelouch fight against?",o:["Japan","United Federation","Holy Britannian Empire","Chinese Federation"],a:2},
 {t:"Code Geass",q:"What is Lelouch's alter ego?",o:["Black King","Zero","Phantom","Renegade"],a:1},
-{t:"Code Geass",q:"What is C.C.'s real name hinted to be?",o:["Cecilia","Cassandra","Unknown — her real name is never confirmed","Clara"],a:2},
 // ── Re:Zero ──
 {t:"Re:Zero",q:"What is the name of Emilia's contracted spirit?",o:["Beatrice","Echidna","Puck","Roswaal"],a:2},
-{t:"Re:Zero",q:"What special ability does Subaru have?",o:["Time stop","Future sight","Return by Death","Memory manipulation"],a:2},
 {t:"Re:Zero",q:"Who is the Witch of Greed?",o:["Satella","Echidna","Sekhmet","Minerva"],a:1},
 {t:"Re:Zero",q:"Who is the Witch of Envy?",o:["Echidna","Satella","Typhon","Daphne"],a:1},
 // ── Demon Slayer deeper ──
 {t:"Demon Slayer",q:"What is the name of Kokushibo's technique?",o:["Moon Breathing","Sun Breathing","Star Breathing","Flame Breathing"],a:0},
-{t:"Demon Slayer",q:"Who was Yoriichi Tsugikuni?",o:["First Demon Slayer","Creator of Sun Breathing","Muzan's rival — the strongest Slayer","Both B and C"],a:3},
 {t:"Demon Slayer",q:"How many Upper Moons are there?",o:["3","6","9","12"],a:1},
+{t:"Demon Slayer",q:"What rank below Hashira in Demon Slayer?",o:["Kanoe","Kinoto","Mizunoto","Taisho"],a:2},
 {t:"Demon Slayer",q:"What is Tanjiro's earring pattern?",o:["Flame","Checkered","Sun pattern","Wave"],a:0},
+{t:"Demon Slayer",q:"Who was Yoriichi Tsugikuni?",o:["First Demon Slayer","Creator of Sun Breathing","Muzan's rival — the strongest Slayer","Both B and C"],a:3},
 // ── Misc Normal ──
 {t:"Anime",q:"Which anime studio is behind One Punch Man Season 1?",o:["Madhouse","Pierrot","Sunrise","J.C.Staff"],a:0},
-{t:"Anime",q:"In Evangelion, what does NERV's motto roughly translate to?",o:["God's in his Heaven","Man shall not live by bread alone","In the beginning God created","We are the chosen ones"],a:0},
-{t:"Anime",q:"What year was Demon Slayer: Kimetsu no Yaiba first published?",o:["2014","2016","2018","2020"],a:1},
 {t:"Anime",q:"Mob Psycho 100 is created by the same author as?",o:["Assassination Classroom","One Punch Man","Saiki K","Dr. Stone"],a:1},
-{t:"Anime",q:"In AOT, who says 'If you win, you live. If you lose, you die.'?",o:["Levi","Erwin","Hange","Pixis"],a:1},
 {t:"Anime",q:"What Nen type does Hisoka use?",o:["Enhancement","Transmutation","Emission","Manipulation"],a:1},
-{t:"Anime",q:"In One Piece, what type of Haki lets you sense things?",o:["Armament Haki","Observation Haki","Conqueror's Haki","Sea Haki"],a:1},
 {t:"Anime",q:"What is Gojo's Domain Expansion called?",o:["Chimera Shadow Garden","Unlimited Void","Malevolent Shrine","Coffin of the Iron Mountain"],a:1},
-{t:"Anime",q:"In FMA, who guards the Gate of Truth?",o:["A Homunculus","The Gate itself (Truth entity)","Hohenheim","Edward"],a:1},
 {t:"Anime",q:"In One Piece, what is the strongest form of Haki?",o:["Armament","Observation","Conqueror's","Advanced Armament"],a:2},
 {t:"Anime",q:"What is the name of the Death God that follows Light Yagami?",o:["Rem","Ryuk","Sidoh","Gelus"],a:1},
 {t:"Anime",q:"In Code Geass, what does Lelouch use to command an army?",o:["Geass power + Black Knights","Code power","Britannia army secretly","Suzaku's support"],a:0},
 {t:"Anime",q:"In Black Clover, what is Asta's grimoire called?",o:["Four-leaf clover","Five-leaf clover","Six-leaf clover","Three-leaf clover"],a:1},
 {t:"Anime",q:"What power does Rimuru Tempest gain from slimes?",o:["Predation — copy abilities","Slime control","Liquid transformation","Absorption"],a:0},
-{t:"Anime",q:"Who trained Goku when he was young before Dragon Ball?",o:["Master Roshi","Kami","King Kai","Grandpa Gohan"],a:3},
 {t:"Anime",q:"In Jujutsu Kaisen, what triggers a cursed technique reversal?",o:["Negative energy","Reversed cursed energy (positive energy)","Domain Expansion","Six Eyes activation"],a:1},
-{t:"Anime",q:"What is the name of the Straw Hat crew's ship?",o:["Merry Go → Thousand Sunny","Golden Lion","Big Top","Moby Dick"],a:0},
+{t:"Anime",q:"What is the name of the Straw Hat crew's ship?",o:["Merry Go then Thousand Sunny","Golden Lion","Big Top","Moby Dick"],a:0},
 {t:"Anime",q:"In HxH, what game does Greed Island take place in?",o:["A video game","An isekai world","A Hunter game accessible by Nen users","A dream world"],a:2},
-{t:"Anime",q:"What is the time limit on Gojo's Domain Expansion?",o:["No limit","Several seconds to minutes depending on use","Exactly 0.2 seconds","He sustains it indefinitely"],a:1},
 {t:"Anime",q:"In Vinland Saga Season 1, who is the main antagonist figure?",o:["Thorkell","Askeladd","Canute","Floki"],a:1},
+{t:"Anime",q:"In FMA, who guards the Gate of Truth?",o:["A Homunculus","The Gate itself (Truth entity)","Hohenheim","Edward"],a:1},
+{t:"Anime",q:"What is Erwin Smith's role in AOT?",o:["Captain","Survey Corps Commander","Military Police Chief","Garrison Captain"],a:1},
+{t:"Anime",q:"In Bleach, what is Ichigo's Bankai called?",o:["Zangetsu","Tensa Zangetsu","Mugetsu","Shikai"],a:1},
+{t:"Anime",q:"In Attack on Titan, what is the name of Levi's squad?",o:["Special Operations Squad","Titan Exterminators","Survey Elite","Wall Rose Unit"],a:0},
+{t:"Anime",q:"In My Hero Academia, who is the number 1 hero after All Might?",o:["Hawks","Best Jeanist","Mirko","Endeavor"],a:3},
+{t:"Anime",q:"What is the name of the Straw Hat crew's doctor's reindeer form?",o:["Walk Point","Guard Point","Heavy Point","Horn Point"],a:0},
+{t:"Anime",q:"In Naruto, what is the Chidori?",o:["Fire-based jutsu","Lightning-based jutsu","Wind-based jutsu","Water-based jutsu"],a:1},
+{t:"Anime",q:"What is the name of Roronoa Zoro's ultimate technique?",o:["Shishi Sonson","Three Thousand Worlds","Oni Giri","Santoryu Ogi: Sanzen Sekai"],a:3},
+{t:"Anime",q:"In Demon Slayer, what is the highest rank a demon slayer can achieve?",o:["Kinoe","Taisho","Hashira","Mizunoto"],a:2},
+{t:"Anime",q:"What is Aizawa's Quirk in MHA?",o:["Zero Gravity","Erasure","Hardening","Capture"],a:1},
+{t:"Anime",q:"In One Piece, who is the creator of the Straw Hats' ship Thousand Sunny?",o:["Iceberg","Franky","Tom","Kokoro"],a:1},
+{t:"Anime",q:"In Bleach, what is the name of Kenpachi's sword?",o:["Nozarashi","Senbonzakura","Zabimaru","Gonryomaru"],a:0},
+{t:"Anime",q:"In AOT, what does RBA stand for?",o:["Reiner, Bertholdt, Annie","Reiss, Braun, Ackermann","Royal Bloodline Ability","Rogue, Bestial, Armored"],a:0},
 ],
 
 hard:[
@@ -575,82 +639,92 @@ hard:[
 {t:"Evangelion",q:"In Evangelion, which Angel has a perfectly symmetrical shadow form?",o:["Sachiel","Leliel","Ramiel","Sahaquiel"],a:1},
 {t:"Evangelion",q:"What is the number of the Eva Unit Shinji pilots?",o:["Unit 00","Unit 01","Unit 02","Unit 03"],a:1},
 {t:"Evangelion",q:"Who is Gendo Ikari's second in command?",o:["Ritsuko","Misato","Fuyutsuki","Keel"],a:2},
+{t:"Evangelion",q:"What is the name of the secret document that describes the future?",o:["The Human Plan","Dead Sea Scrolls","SEELE Files","NERV Manifesto"],a:1},
+{t:"Evangelion",q:"In Rebuild of Evangelion, what does Unit-01 achieve after consuming an angel?",o:["God-like power","Awakening state","Pseudo-evolution","S2 engine"],a:3},
 // ── Steins;Gate ──
 {t:"Steins;Gate",q:"In Steins;Gate, what is the divergence number of the true Steins Gate world line?",o:["1.048596","1.130426","1.337280","0.571024"],a:0},
 {t:"Steins;Gate",q:"What does SERN stand for in Steins;Gate?",o:["Science and Engineering Research Network","Société Européenne de Recherche Nucléaire","Synthetic Emergency Research Node","Systematic European Research Network"],a:1},
 {t:"Steins;Gate",q:"What is Okabe Rintaro's self-proclaimed title?",o:["Future Gadget Lab Chief","Mad Scientist","Hououin Kyouma","The Mastermind"],a:2},
 {t:"Steins;Gate",q:"What object does the Future Gadget Lab use as a time machine?",o:["A refrigerator","A phone microwave","A phone booth","A television"],a:1},
 {t:"Steins;Gate",q:"In Steins;Gate 0, what is the name of the AI modeled after Makise Kurisu?",o:["Amadeus","Athena","Kurisu-AI","Chrono"],a:0},
+{t:"Steins;Gate",q:"What is Reading Steiner in Steins;Gate?",o:["Ability to read timelines","Okabe's ability to retain memories across world line shifts","A special device","A SERN technique"],a:1},
+{t:"Steins;Gate",q:"In Steins;Gate, who is Suzuha's father?",o:["Okabe","Daru","Moeka","Mr. Braun"],a:1},
 // ── Hunter x Hunter deep ──
-{t:"Hunter x Hunter",q:"What are Kurapika's three Nen chain conditions?",o:["Speed, Power, Duration","Restrictions to Spiders only; chain use costs life; healing forbidden","Must use Emperor Time; must not use with allies","Uses all 10 fingers simultaneously"],a:1},
+{t:"Hunter x Hunter",q:"What are Kurapika's chain conditions?",o:["Speed, Power, Duration","Restrictions to Spiders only; chain use costs life; healing forbidden","Must use Emperor Time; must not use with allies","Uses all 10 fingers simultaneously"],a:1},
 {t:"Hunter x Hunter",q:"What is the name of the Chimera Ant King?",o:["Neferpitou","Meruem","Shaiapouf","Menthuthuyoupi"],a:1},
 {t:"Hunter x Hunter",q:"What is Isaac Netero's ultimate technique?",o:["Zero Hand","100-Type Guanyin Bodhisattva","Poor Man's Rose","Miniature Rose"],a:1},
 {t:"Hunter x Hunter",q:"What is Gon's final Nen transformation called?",o:["Gon's Awakening","Adult Gon — Jajanken Ultimate","Nen Contract","Gon's Vow"],a:0},
-{t:"Hunter x Hunter",q:"What is the name of the Dark Continent expedition committee?",o:["Kakin Expedition","Zodiacs","V5 Beyond Group","Hunter Council"],a:1},
+{t:"Hunter x Hunter",q:"What condition does Kurapika's Emperor Time fulfill?",o:["Makes him a Specialist temporarily","Turns all his Nen types to 100%","Makes him faster","Unlocks chain judgment"],a:1},
 // ── Berserk ──
 {t:"Berserk",q:"Who is the author of Berserk?",o:["Yoshihiro Togashi","Kentaro Miura","Naoki Urasawa","Junji Ito"],a:1},
 {t:"Berserk",q:"What is the name of Guts' massive sword?",o:["Dragon Slayer","Blade of Hell","God Killer","Iron Rend"],a:0},
-{t:"Berserk",q:"What is the group of God Hand members?",o:["The Apostles","God Hand — 5 members","Skull Knight's Army","Neo-Band of Falcon"],a:1},
 {t:"Berserk",q:"What event triggered Guts' descent into darkness?",o:["The Eclipse","Griffith's betrayal","Casca's death","The Demon Child birth"],a:0},
 {t:"Berserk",q:"What is Griffith's God Hand form called?",o:["Grunbeld","Void","Femto","Conrad"],a:2},
 {t:"Berserk",q:"Guts originally belonged to which mercenary group?",o:["Skull Knight's forces","Band of the Falcon","The Apostles","Kushan Army"],a:1},
+{t:"Berserk",q:"What is the Beherit also called?",o:["Crystal of Darkness","Egg of the King","God's Eye","Devil's Call"],a:1},
+{t:"Berserk",q:"What is the name of Guts' traveling witch companion?",o:["Farnese","Schierke","Casca","Slan"],a:1},
 // ── Vinland Saga ──
 {t:"Vinland Saga",q:"In Vinland Saga, who is Thorfinn's father?",o:["Askeladd","Bjorn","Thors","Floki"],a:2},
 {t:"Vinland Saga",q:"In Vinland Saga Season 2, on what farm is Thorfinn a slave?",o:["Ketil's Farm","Leif's Farm","Canute's Manor","Snake's Farm"],a:0},
 {t:"Vinland Saga",q:"What is the name of the legendary land Thorfinn seeks?",o:["Vinland","Valhalla","Miklagard","Jomsburg"],a:0},
+{t:"Vinland Saga",q:"What does Thorfinn's father Thors do before his death?",o:["Merchant","Former Jomsviking turned farmer","Blacksmith","Chieftain"],a:1},
 // ── Fate Series ──
 {t:"Fate",q:"In Fate/Zero, what is Kiritsugu Emiya's combat style called?",o:["Magecraft assassination","Mage Killer style","Reinforcement magic","Reality Marble combat"],a:1},
 {t:"Fate",q:"What is the class of Artoria Pendragon in Fate/Stay Night?",o:["Archer","Lancer","Saber","Rider"],a:2},
 {t:"Fate",q:"What is the name of Gilgamesh's ultimate Noble Phantasm?",o:["Ea — Enuma Elish","Gate of Babylon","Caladbolg","Durandal"],a:0},
 {t:"Fate",q:"Who is the Master of Berserker in Fate/Zero?",o:["Kayneth","Tokiomi","Kariya Matou","Kiritsugu"],a:2},
 {t:"Fate",q:"What is Archer's (EMIYA) Noble Phantasm in FSN?",o:["Unlimited Blade Works","Gate of Babylon","Camelot","Excalibur"],a:0},
+{t:"Fate",q:"Who summons Gilgamesh in Fate/Zero?",o:["Kiritsugu","Tokiomi Tohsaka","Kariya","Kayneth"],a:1},
 // ── Made in Abyss ──
 {t:"Made in Abyss",q:"In Made in Abyss, what is a White Whistle made from?",o:["Rare relics","The corpse of a beloved person","Ancient alloy from the 7th layer","Soul fragments"],a:1},
 {t:"Made in Abyss",q:"What are the curses of the Abyss called?",o:["Curse of the Abyss","The Strains","Abyss Sickness","Layer Curse"],a:0},
 {t:"Made in Abyss",q:"What is the name of Riko's mother?",o:["Lyza the Annihilator","Ozen","Prushka","Bondrewd"],a:0},
-// ── Mushishi ──
-{t:"Mushishi",q:"In Mushishi, what are Mushi?",o:["Spirits of the dead","Ancient life forms closer to life itself","Parasitic demons","Elemental entities"],a:1},
-{t:"Mushishi",q:"Who is the main character of Mushishi?",o:["Yoki","Ginko","Adashino","Tanyuu"],a:1},
+{t:"Made in Abyss",q:"What is the 7th layer called?",o:["The Final Maelstrom","The Unreturned","The Sea of Corpses","The Great Fault"],a:0},
 // ── Promised Neverland ──
-{t:"Promised Neverland",q:"In The Promised Neverland, who is the true enemy of the children?",o:["The humans outside","The demon world rulers","Isabella (Mama) — controlled by demons","The demon farmers"],a:3},
-{t:"Promised Neverland",q:"What is the name of the orphanage the children escape from?",o:["Grace Field House","Lambda 7214","Goldy Pond","Glory Bell"],a:0},
+{t:"Promised Neverland",q:"In The Promised Neverland, what is the name of the orphanage the children escape from?",o:["Grace Field House","Lambda 7214","Goldy Pond","Glory Bell"],a:0},
 {t:"Promised Neverland",q:"What does the number tattooed on the children represent?",o:["Their birth order","Their ID/shipping number","Their intelligence rank","Their demon quality grade"],a:1},
-// ── Jojo's Bizarre Adventure ──
+// ── JoJo's Bizarre Adventure ──
 {t:"JoJo's Bizarre Adventure",q:"What is the name of DIO's Stand?",o:["Star Platinum","The World","Crazy Diamond","Killer Queen"],a:1},
 {t:"JoJo's Bizarre Adventure",q:"What is the main hero of JoJo Part 3?",o:["Jonathan Joestar","Joseph Joestar","Jotaro Kujo","Giorno Giovanna"],a:2},
 {t:"JoJo's Bizarre Adventure",q:"What does Za Warudo (The World) do?",o:["Create illusions","Stop time","Travel dimensions","Erase memories"],a:1},
 {t:"JoJo's Bizarre Adventure",q:"What body part does Kira Yoshikage have a fetish for?",o:["Eyes","Feet","Hands","Hair"],a:2},
 {t:"JoJo's Bizarre Adventure",q:"What is Giorno Giovanna's Stand called?",o:["Gold Experience Requiem","Crazy Diamond","King Crimson","Purple Haze"],a:0},
 {t:"JoJo's Bizarre Adventure",q:"What is the name of the antagonist in JoJo Part 5?",o:["Diavolo","Enrico Pucci","Yoshikage Kira","Funny Valentine"],a:0},
+{t:"JoJo's Bizarre Adventure",q:"What is Pucci's Stand in JoJo Part 6?",o:["Made in Heaven","Whitesnake","C-Moon","D4C"],a:0},
+{t:"JoJo's Bizarre Adventure",q:"Who is the author of JoJo's Bizarre Adventure?",o:["Masashi Kishimoto","Hirohiko Araki","Eiichiro Oda","Yoshihiro Togashi"],a:1},
+{t:"JoJo's Bizarre Adventure",q:"What is Killer Queen's main ability?",o:["Stop time","Turn anything into a bomb","Create illusions","Erase time"],a:1},
 // ── Misc Hard ──
 {t:"Anime",q:"In FMA, what is the Philosopher's Stone made from?",o:["Refined alchemy","Human souls","Dragon stones","Red water"],a:1},
 {t:"Anime",q:"What chapter does Attack on Titan manga end on?",o:["Chapter 130","Chapter 139","Chapter 145","Chapter 122"],a:1},
-{t:"Anime",q:"In HxH, what is Gon's power level after the Chimera Ant arc?",o:["He loses all Nen","He gains Specialist Nen","He becomes a Special Grade Hunter","He achieves Godspeed permanently"],a:0},
+{t:"Anime",q:"In HxH, what happens to Gon's Nen after the Chimera Ant arc?",o:["He loses all Nen","He gains Specialist Nen","He becomes a Special Grade Hunter","He achieves Godspeed permanently"],a:0},
 {t:"Anime",q:"What is the name of Togashi's other famous manga?",o:["Yu Yu Hakusho","Slam Dunk","Akira","Berserk"],a:0},
-{t:"Anime",q:"In Steins;Gate, what does the butterfly effect primarily affect in the story?",o:["Okabe's memory","The D-Mail divergences","Kurisu's invention","SERN's plans"],a:1},
+{t:"Anime",q:"In Steins;Gate, what does the butterfly effect primarily affect?",o:["Okabe's memory","The D-Mail divergences","Kurisu's invention","SERN's plans"],a:1},
 {t:"Anime",q:"Who wrote the manga 'Vagabond'?",o:["Naoki Urasawa","Takehiko Inoue","Kentaro Miura","Osamu Tezuka"],a:1},
-{t:"Anime",q:"What is the name of the God of Death in Death Note who drops the notebook?",o:["Rem","Sidoh","Ryuk","Gelus"],a:2},
-{t:"Anime",q:"In Fate/Zero, who summons Gilgamesh?",o:["Kiritsugu","Tokiomi Tohsaka","Kariya","Kayneth"],a:1},
-{t:"Anime",q:"What is the real name of 'Beyond the Boundary' protagonist?",o:["Akihito Kanbara","Mirai Kuriyama","Hiroomi Nase","Izumi Nase"],a:0},
 {t:"Anime",q:"In Fullmetal Alchemist (2003, not Brotherhood), who is the main villain?",o:["Father","Dante","Envy","Pride"],a:1},
 {t:"Anime",q:"What year was the original Fullmetal Alchemist anime released?",o:["2001","2003","2005","2007"],a:1},
-{t:"Anime",q:"Mob Psycho 100 author ONE also wrote which massively popular anime?",o:["Dragon Ball","One Punch Man","Overlord","Saiki K"],a:1},
-{t:"Anime",q:"In Overlord, what is the name of Ainz Ooal Gown's guild headquarters?",o:["Nazarick","Yggdrasil","The Tomb","Great Tomb of Nazarick"],a:3},
-{t:"Anime",q:"In Mushishi, what is Ginko's condition that attracts Mushi?",o:["He emits high Mushi aura","His white hair and green eye attract them","He has no soul","He was born in the Kokai"],a:1},
-{t:"Anime",q:"Who is the author of the JoJo's Bizarre Adventure manga?",o:["Masashi Kishimoto","Hirohiko Araki","Eiichiro Oda","Yoshihiro Togashi"],a:1},
-{t:"Anime",q:"What is the name of Pucci's Stand in JoJo Part 6?",o:["Made in Heaven","Whitesnake","C-Moon","D4C"],a:0},
+{t:"Anime",q:"In Overlord, what is the name of Ainz's guild HQ?",o:["Nazarick","Yggdrasil","The Tomb","Great Tomb of Nazarick"],a:3},
+{t:"Anime",q:"What is Ginko's condition in Mushishi that attracts Mushi?",o:["He emits high Mushi aura","His white hair and green eye attract them","He has no soul","He was born in the Kokai"],a:1},
+{t:"Anime",q:"What is Griffith's dream in Berserk?",o:["The Eclipse","His own kingdom","The God Hand","The Beherit"],a:1},
 {t:"Anime",q:"In Berserk, what does the Brand of Sacrifice cause?",o:["Demons smell Guts","Demons are attracted and attack the branded person","Griffith gains power","Guts becomes immortal"],a:1},
-{t:"Anime",q:"What is the divergence value at which Kurisu dies and WW3 doesn't happen?",o:["Below 1.000000","Above 1.000000","Exactly 0.000000","The Steins Gate line 1.048596"],a:3},
-{t:"Anime",q:"In Made in Abyss, what is the 7th layer called?",o:["The Final Maelstrom","The Unreturned","The Sea of Corpses","The Great Fault"],a:0},
-{t:"Anime",q:"In Vinland Saga, what does Thorfinn's father Thors do for a living before his death?",o:["Merchant","Former Jomsviking turned farmer","Blacksmith","Chieftain"],a:1},
-{t:"Anime",q:"What is the name of the Irregulars' guild in No Game No Life?",o:["Blank","Imanity","Sora & Shiro Inc","Empty"],a:0},
-{t:"Anime",q:"In Death Note, what is L's real name?",o:["Lawliet","L. Lawliet","Ryuzaki Lawliet","His real name is only 'L'"],a:1},
+{t:"Anime",q:"What divergence value is needed for Kurisu to survive in Steins;Gate?",o:["Below 1.000000","Above 1.000000","Exactly 0.000000","The Steins Gate line 1.048596"],a:3},
 {t:"Anime",q:"In Code Geass, what does the Zero Requiem plan entail?",o:["Destroying Britannia militarily","Lelouch becoming Emperor then dying — freeing the world","C.C becoming immortal","Suzaku taking the throne"],a:1},
-{t:"Anime",q:"In AOT, what is the name of the Tybur family's War Hammer Titan?",o:["Lara Tybur wields it","Willy Tybur wields it","Both A and B","It is passed down by eating"],a:3},
-{t:"Anime",q:"What does Yuno's grimoire look like?",o:["Three-leaf clover","Four-leaf clover","Five-leaf clover","Six-leaf clover"],a:1},
+{t:"Anime",q:"In AOT, what is the name of the Tybur family's War Hammer Titan wielder?",o:["Lara Tybur","Willy Tybur","Both pass it down","It is passed down by eating"],a:3},
 {t:"Anime",q:"In Overlord, what class is Ainz Ooal Gown?",o:["Warrior","Paladin","Overlord — Undead-type magic caster","Necromancer"],a:2},
-{t:"Anime",q:"What is the name of Griffith's dream in Berserk?",o:["The Eclipse","His own kingdom","The God Hand","The Beherit"],a:1},
-{t:"Anime",q:"In Steins;Gate, who is Suzuha's father?",o:["Okabe","Daru","Moeka","Mr. Braun"],a:1},
+{t:"Anime",q:"What is the name of No Game No Life protagonists' gaming guild?",o:["Blank","Imanity","Sora & Shiro Inc","Empty"],a:0},
+{t:"Anime",q:"In Death Note, what is L's full real name?",o:["Lawliet","L. Lawliet","Ryuzaki Lawliet","His real name is only L"],a:1},
+{t:"Anime",q:"What is Yuno's grimoire in Black Clover?",o:["Three-leaf clover","Four-leaf clover","Five-leaf clover","Six-leaf clover"],a:1},
+{t:"Anime",q:"In Vinland Saga, what warrior group does Thors originally belong to?",o:["Varangian Guard","Jomsvikings","Danish Royal Army","Nordic Raiders"],a:1},
+{t:"Anime",q:"What is the name of Made in Abyss's main antagonist researcher?",o:["Lyza","Ozen","Bondrewd","Srajo"],a:2},
+{t:"Anime",q:"In FMA Brotherhood, what is Greed's unique ability?",o:["Fire control","Ultimate Shield","Super speed","Manipulating gravity"],a:1},
+{t:"Anime",q:"Who is the real villain behind Aizen in Bleach's final arc?",o:["Yhwach","Jugram Haschwalth","Gerard Valkyrie","Uryu Ishida"],a:0},
+{t:"Anime",q:"In Fate/Zero, what is the name of the bounded field Caster creates from children?",o:["Garden of Avalon","Lair of the Beast","Horror Sea","Ionioi Hetairoi"],a:1},
+{t:"Anime",q:"In JoJo Part 4, what is Josuke's Stand Crazy Diamond's main power?",o:["Time stop","Restore and heal objects/people","Create bombs","Speed"],a:1},
+{t:"Anime",q:"What is the name of the final form of Ichigo's Zanpakuto?",o:["Tensa Zangetsu","Mugetsu (Final Getsuga)","True Shikai","Vasto Lorde"],a:1},
+{t:"Anime",q:"In Evangelion Rebuild, what does the Wunder ship run on?",o:["Solar energy","Eva Unit-01 as its core power source","Nuclear power","Anti-AT field"],a:1},
+{t:"Anime",q:"What is the name of the second-in-command of the Phantom Troupe in HxH?",o:["Feitan","Machi","Phinks","Shalnark"],a:0},
+{t:"Anime",q:"In AOT, who is the true holder of the Founding Titan's power?",o:["The Fritz/Reiss bloodline","Only Eren can use it","Whoever eats the Founding Titan","Any Eldian"],a:0},
+{t:"Anime",q:"In Berserk, what is the name of the land Griffith creates?",o:["Falconia","Midland","Astral Kingdom","New Midland"],a:0},
+{t:"Anime",q:"What is the name of the Philosopher's Stone city in FMA?",o:["Central City","Liore","Xerxes","Dublith"],a:2},
 ],
 };
 
@@ -663,8 +737,9 @@ const G = {
   p1score:0, p2score:0,
   qIndex:0, questions:[],
   timerInterval:null, timeLeft:20,
-  answered:false,
+  myAnswered:false,       // did I personally answer this question?
   dbRef:null, unsubscribe:null,
+  lastQIndex:-1,          // track which question we've rendered
 };
 
 // ══════════════════════════════════════════════
@@ -703,7 +778,6 @@ window.hostServer = async function(){
   G.hostName = n; G.role = 'host'; G.level = selLvl;
   G.sid = 'qt_'+Math.random().toString(36).substr(2,8)+Date.now().toString(36);
 
-  // Pick 25 random unique questions from level pool
   const pool = shuffle(QB[G.level]);
   G.questions = pool.slice(0,25);
 
@@ -715,6 +789,7 @@ window.hostServer = async function(){
     qIndex: 0,
     p1score: 0,
     p2score: 0,
+    // -1 = not answered, 0-3 = answer index, -2 = timed out
     p1answered: -1,
     p2answered: -1,
     questions: G.questions,
@@ -734,7 +809,6 @@ window.hostServer = async function(){
   document.getElementById('link-txt').textContent = link;
   goTo('s-server');
 
-  // Listen for guest joining
   if(G.unsubscribe) G.unsubscribe();
   G.unsubscribe = onValue(sessRef, (snap)=>{
     const s = snap.val();
@@ -745,9 +819,6 @@ window.hostServer = async function(){
       document.getElementById('lobby-p2-name').classList.add('filled');
       document.getElementById('lobby-p2-dot').classList.add('on');
       document.getElementById('btn-start').classList.add('ready');
-    }
-    if(s.status === 'playing' && G.role === 'host' && document.getElementById('s-battle').classList.contains('on')){
-      // already in battle
     }
   });
 };
@@ -775,11 +846,11 @@ window.startMatch = async function(){
 
   G.questions = s.questions;
   G.p1score = 0; G.p2score = 0;
+  G.lastQIndex = -1;
   setupBattleUI(s.host, s.guest);
   goTo('s-battle');
   hideWait();
   listenBattle();
-  loadQuestion(0);
 };
 
 // ══════════════════════════════════════════════
@@ -816,6 +887,7 @@ window.joinMatch = async function(){
   G.level = s.level;
   G.questions = s.questions;
   G.dbRef = sessRef;
+  G.lastQIndex = -1;
 
   await update(sessRef,{guest: n});
 
@@ -824,7 +896,6 @@ window.joinMatch = async function(){
   showWait('Waiting for host to start the match...');
   G.p1score = 0; G.p2score = 0;
 
-  // Listen for match start
   if(G.unsubscribe) G.unsubscribe();
   G.unsubscribe = onValue(sessRef,(snap)=>{
     const ss = snap.val();
@@ -833,9 +904,9 @@ window.joinMatch = async function(){
       G.questions = ss.questions;
       hideWait();
       listenBattle();
-      loadQuestion(ss.qIndex||0);
     }
     if(ss.status === 'done'){
+      clearInterval(G.timerInterval);
       G.p1score = ss.p1score||0;
       G.p2score = ss.p2score||0;
       showResult();
@@ -843,35 +914,77 @@ window.joinMatch = async function(){
   });
 };
 
-// ══════════════════════════════════════════════
-// BATTLE LISTENER (real-time sync)
-// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// BATTLE LISTENER — THE CORE SYNC ENGINE
+//
+// HOW IT WORKS:
+// - Firebase stores: qIndex, p1answered, p2answered, p1score, p2score
+// - Each player answers locally → writes their answer to Firebase
+// - BOTH players listen to Firebase
+// - When Firebase qIndex changes → BOTH players call loadQuestion(newIndex)
+// - The HOST is responsible for advancing qIndex when both players have answered
+// - If timer runs out, the local client writes -2 (timeout) for themselves
+// ══════════════════════════════════════════════════════
 function listenBattle(){
   const sessRef = ref(db,'sessions/'+G.sid);
   if(G.unsubscribe) G.unsubscribe();
+
   G.unsubscribe = onValue(sessRef,(snap)=>{
     const s = snap.val();
     if(!s) return;
 
-    // Sync scores display
+    // ── Sync scores ──
     document.getElementById('b-p1-score').textContent = s.p1score||0;
     document.getElementById('b-p2-score').textContent = s.p2score||0;
-    document.getElementById('prog-p1').style.width = Math.min(100,((s.p1score||0)/250)*100)+'%';
-    document.getElementById('prog-p2').style.width = Math.min(100,((s.p2score||0)/250)*100)+'%';
+    document.getElementById('prog-p1').style.width = Math.min(100,((s.p1score||0)/25)*100)+'%';
+    document.getElementById('prog-p2').style.width = Math.min(100,((s.p2score||0)/25)*100)+'%';
     G.p1score = s.p1score||0;
     G.p2score = s.p2score||0;
 
+    // ── Update answered indicators ──
+    const p1Done = s.p1answered !== -1;
+    const p2Done = s.p2answered !== -1;
+    document.getElementById('ans-p1-dot').classList.toggle('done', p1Done);
+    document.getElementById('ans-p2-dot').classList.toggle('done', p2Done);
+
+    // ── If game is done ──
     if(s.status === 'done'){
       clearInterval(G.timerInterval);
       setTimeout(showResult, 800);
+      return;
     }
 
-    // Advance question when both answered (host controls)
+    // ── If qIndex changed in Firebase → load that question for everyone ──
+    if(s.status === 'playing' && s.qIndex !== G.lastQIndex){
+      G.lastQIndex = s.qIndex;
+      G.myAnswered = false;
+      loadQuestion(s.qIndex);
+      return;
+    }
+
+    // ── HOST: check if both players answered → advance ──
     if(G.role === 'host' &&
-       s.qIndex === G.qIndex &&
-       s.p1answered !== -1 && s.p2answered !== -1 &&
-       s.status === 'playing'){
-      // both answered
+       s.status === 'playing' &&
+       s.p1answered !== -1 &&
+       s.p2answered !== -1 &&
+       s.qIndex === G.qIndex){
+      // Both answered, show result briefly then advance
+      showAnswerResults(s.p1answered, s.p2answered, G.questions[G.qIndex].a);
+      setTimeout(async ()=>{
+        const nextIdx = G.qIndex + 1;
+        if(nextIdx < 25){
+          await update(sessRef,{
+            qIndex: nextIdx,
+            p1answered: -1,
+            p2answered: -1,
+            qStartTs: Date.now()
+          });
+          // qIndex change will trigger listenBattle → loadQuestion for both
+        } else {
+          // Game over
+          await update(sessRef,{status:'done'});
+        }
+      }, 1800);
     }
   });
 }
@@ -884,16 +997,21 @@ function setupBattleUI(p1,p2){
   document.getElementById('b-p2-name').textContent = p2;
   document.getElementById('b-p1-score').textContent = '0';
   document.getElementById('b-p2-score').textContent = '0';
+  document.getElementById('ans-p1-label').textContent = p1.substring(0,4);
+  document.getElementById('ans-p2-label').textContent = p2.substring(0,4);
 }
 
 function loadQuestion(idx){
-  G.qIndex = idx; G.answered = false;
+  G.qIndex = idx;
+  G.myAnswered = false;
+
   const q = G.questions[idx];
   document.getElementById('q-num').textContent = (idx+1)+'/25';
   document.getElementById('q-badge').textContent = q.t;
   document.getElementById('q-text').textContent = q.q;
-  document.getElementById('prog-p1').style.width = Math.min(100,(G.p1score/250)*100)+'%';
-  document.getElementById('prog-p2').style.width = Math.min(100,(G.p2score/250)*100)+'%';
+  document.getElementById('ans-p1-dot').classList.remove('done');
+  document.getElementById('ans-p2-dot').classList.remove('done');
+  document.getElementById('battle-status').textContent = 'Q'+(idx+1)+' — '+q.t;
 
   const grid = document.getElementById('opts-grid');
   grid.innerHTML = '';
@@ -904,8 +1022,29 @@ function loadQuestion(idx){
     grid.appendChild(b);
   });
 
-  document.getElementById('battle-status').textContent = 'Q'+(idx+1)+' — '+q.t;
   startTimer(q.a, idx);
+}
+
+// Show the correct/wrong highlights after both have answered
+function showAnswerResults(p1ans, p2ans, correctIdx){
+  const btns = document.querySelectorAll('.opt-btn');
+  btns.forEach((b,i)=>{
+    b.disabled = true;
+    if(i === correctIdx){
+      b.classList.add('reveal-correct');
+    }
+  });
+  // Highlight my answer if I answered
+  const myAns = G.role === 'host' ? p1ans : p2ans;
+  if(myAns >= 0 && myAns < btns.length){
+    btns[myAns].classList.remove('reveal-correct');
+    if(myAns === correctIdx){
+      btns[myAns].classList.add('correct');
+    } else {
+      btns[myAns].classList.add('wrong');
+      btns[correctIdx].classList.add('reveal-correct');
+    }
+  }
 }
 
 const CIRCUM = 2*Math.PI*24;
@@ -925,87 +1064,47 @@ function startTimer(correctIdx, qIdx){
     if(G.timeLeft<=5) ring.style.stroke = 'var(--gold)';
     if(G.timeLeft<=0){
       clearInterval(G.timerInterval);
-      if(!G.answered) revealAndNext(null, correctIdx, qIdx);
+      if(!G.myAnswered){
+        // Timed out — write -2 for myself
+        submitAnswer(-2, correctIdx);
+      }
     }
   },1000);
 }
 
+// Called when player clicks an option
 function answerQ(chosen, correct, btn){
-  if(G.answered) return;
-  G.answered = true;
+  if(G.myAnswered) return;
+  G.myAnswered = true;
   clearInterval(G.timerInterval);
-  const isRight = chosen === correct;
 
-  if(isRight){ btn.classList.add('correct'); }
-  else { btn.classList.add('wrong'); }
+  // Show immediate local feedback
+  if(chosen === correct){
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+  }
+  // Disable all buttons locally after answering
+  document.querySelectorAll('.opt-btn').forEach(b=>b.disabled = true);
 
-  // Save answer to Firebase
+  submitAnswer(chosen, correct);
+}
+
+// Write answer to Firebase — host controls question advancement
+async function submitAnswer(chosen, correct){
   const sessRef = ref(db,'sessions/'+G.sid);
   const updates = {};
+  const isRight = chosen === correct;
+
   if(G.role === 'host'){
     updates.p1answered = chosen;
-    if(isRight){ updates.p1score = G.p1score + 10; G.p1score += 10; }
+    if(isRight) updates.p1score = G.p1score + 1;
   } else {
     updates.p2answered = chosen;
-    if(isRight){ updates.p2score = G.p2score + 10; G.p2score += 10; }
+    if(isRight) updates.p2score = G.p2score + 1;
   }
-  update(sessRef, updates);
-
-  revealAndNext(chosen, correct, G.qIndex);
-}
-
-function revealAndNext(chosen, correct, qIdx){
-  const btns = document.querySelectorAll('.opt-btn');
-  btns.forEach((b,i)=>{
-    b.disabled = true;
-    if(i === correct && chosen !== correct) b.classList.add('reveal-correct');
-  });
-
-  setTimeout(async ()=>{
-    if(qIdx < 24){
-      const nextIdx = qIdx + 1;
-      if(G.role === 'host'){
-        const sessRef = ref(db,'sessions/'+G.sid);
-        await update(sessRef,{qIndex: nextIdx, p1answered:-1, p2answered:-1, qStartTs: Date.now()});
-      }
-      // Guest waits for Firebase update OR host proceeds — both load next question
-      loadQuestion(nextIdx);
-    } else {
-      endGame();
-    }
-  }, 1800);
-}
-
-async function endGame(){
-  clearInterval(G.timerInterval);
-  const sessRef = ref(db,'sessions/'+G.sid);
-  const updates = {status:'done'};
-  if(G.role==='host') updates.p1score = G.p1score;
-  else updates.p2score = G.p2score;
   await update(sessRef, updates);
-
-  setTimeout(async ()=>{
-    const snap = await get(sessRef);
-    const s = snap.val();
-    if(s){ G.p1score = s.p1score||G.p1score; G.p2score = s.p2score||G.p2score; }
-    showResult();
-  }, 1500);
-}
-
-function showResult(){
-  if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
-  document.getElementById('res-p1-name').textContent = G.hostName;
-  document.getElementById('res-p2-name').textContent = G.guestName;
-  document.getElementById('res-p1-pts').textContent = G.p1score;
-  document.getElementById('res-p2-pts').textContent = G.p2score;
-  let win = '';
-  if(G.p1score > G.p2score){ win = G.hostName+' Wins!'; launchConfetti(); }
-  else if(G.p2score > G.p1score){ win = G.guestName+' Wins!'; launchConfetti(); }
-  else { win = 'Draw — Rematch?'; }
-  document.getElementById('winner-badge').textContent = win;
-  document.getElementById('res-detail').textContent =
-    'Correct: '+Math.round(G.p1score/10)+' vs '+Math.round(G.p2score/10)+' out of 25';
-  goTo('s-result');
+  // After writing, listenBattle fires and host checks if both answered
 }
 
 // ══════════════════════════════════════════════
@@ -1021,16 +1120,37 @@ function hideWait(){
 }
 
 // ══════════════════════════════════════════════
+// RESULT
+// ══════════════════════════════════════════════
+function showResult(){
+  if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
+  clearInterval(G.timerInterval);
+  document.getElementById('res-p1-name').textContent = G.hostName;
+  document.getElementById('res-p2-name').textContent = G.guestName;
+  document.getElementById('res-p1-pts').textContent = G.p1score;
+  document.getElementById('res-p2-pts').textContent = G.p2score;
+  let win = '';
+  if(G.p1score > G.p2score){ win = G.hostName+' Wins!'; launchConfetti(); }
+  else if(G.p2score > G.p1score){ win = G.guestName+' Wins!'; launchConfetti(); }
+  else { win = 'Draw — Rematch?'; }
+  document.getElementById('winner-badge').textContent = win;
+  document.getElementById('res-detail').textContent =
+    'Score: '+G.p1score+' — '+G.p2score+' out of 25 points';
+  goTo('s-result');
+}
+
+// ══════════════════════════════════════════════
 // RESET
 // ══════════════════════════════════════════════
 window.resetAll = function(){
   clearInterval(G.timerInterval);
   if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
-  Object.assign(G,{sid:'',role:'',p1score:0,p2score:0,qIndex:0,questions:[],timeLeft:20,answered:false,hostName:'',guestName:'',dbRef:null});
+  Object.assign(G,{sid:'',role:'',p1score:0,p2score:0,qIndex:0,questions:[],timeLeft:20,myAnswered:false,hostName:'',guestName:'',dbRef:null,lastQIndex:-1});
   location.hash = '';
 };
 
 window.leaveSession = function(){
+  clearInterval(G.timerInterval);
   if(G.unsubscribe){ G.unsubscribe(); G.unsubscribe = null; }
   location.hash = '';
 };
@@ -1073,4 +1193,3 @@ checkJoinMode();
 </script>
 </body>
 </html>
-
